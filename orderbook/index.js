@@ -7,11 +7,11 @@ export default class Orderbook {
     this.sellB = new Deque()
   }
 
-  submitSellA() {
-    
+  submitSellA(order) {
+    sellA.push(order)
   }
 
-  submitSellB() {
-
+  submitSellB(order) {
+    sellB.push(order)
   }
 }
