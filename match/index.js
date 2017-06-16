@@ -10,9 +10,9 @@ export default class Match {
     return new Promise((resolve, reject) => {
       return Promise.delay(1000)
       .then(() => {
-        return this.orderbook.sellA
-      }).then((book) => {
-        console.log('sellA book', book)
+        return this.orderbook.sellA.peekFront()
+      }).then((element) => {
+        console.log('first element', element)
         return this.daemon()
       }).catch((err) => {
         reject(err)
