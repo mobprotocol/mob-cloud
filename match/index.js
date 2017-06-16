@@ -1,3 +1,4 @@
+import Promise from 'bluebird'
 
 export default class Match {
   constructor(params) {
@@ -6,7 +7,17 @@ export default class Match {
   }
 
   daemon() {
-    console.log('hit Matching daemon')
+    return new Promise((resolve, reject) => {
+      return Promise.delay(1000)
+      .then(() => {
+        return this.orderbook.sellA
+      }).then((book) => {
+        console.log('sellA book', book)
+        return this.daemon()
+      }).catch((err) => {
+        reject(err)
+      })
+    })
   }
 
 }
