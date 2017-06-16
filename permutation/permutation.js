@@ -1,5 +1,6 @@
 import Orderbook from '../orderbook/index'
 import Simulation from '../simulation/index'
+import Match from '../match/index'
 
 export default class Permutation {
   constructor() {
@@ -8,7 +9,9 @@ export default class Permutation {
     this.simulation = new Simulation({
       orderbook: this.orderbook
     })
-    // this.match
+    this.match = new Match({
+      orderbook: this.orderbook
+    })
     // this.clean
   }
 }
