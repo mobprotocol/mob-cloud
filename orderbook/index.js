@@ -8,10 +8,12 @@ export default class Orderbook {
   }
 
   submitSellA(order) {
-    sellA.push(order)
+    console.log('### submitting sellA order', order)
+    this.sellA.push(order)
   }
 
   submitSellB(order) {
-    sellB.push(order)
+    console.log('### submitting sellB order', order)
+    this.sellB.push(order)
   }
 }
