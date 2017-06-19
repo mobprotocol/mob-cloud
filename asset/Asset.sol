@@ -23,9 +23,16 @@ contract Asset {
         balances[msg.sender] -= value;
         balances[to] += value;
         Transfer( msg.sender, to, value );
+        return true;
+    }
+
+    function approve( address spender, uint value ) returns (bool) {
+        if ( balances[msg.sender] < value ) { throw; }
+        approvals[msg.sender][spender] = value;
+        Approval( msg.sender, spender, value );
+        return true;
     }
 
     function balanceOf(address who) constant returns (uint) {
         return balances[who];
     }
-}
