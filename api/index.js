@@ -1,8 +1,10 @@
 import express from 'express'
+import Promise from 'bluebird'
+
 const app = express()
 
-app.get('/subscribe', () => {
-  
+app.get('/balance', () => {
+
 })
 
 app.listen(3000, () => {
