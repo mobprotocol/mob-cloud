@@ -27,7 +27,7 @@ export function getContractFile(directory, file) {
   return new Promise((resolve, reject) => {
     return Promise.delay(0)
     .then(() => {
-      return fs.readdirAsync(`${directory}/${file}`)
+      return fs.readFileAsync(`${directory}/${file}`)
     }).then((file) => {
       resolve(file)
     }).catch((err) => {
