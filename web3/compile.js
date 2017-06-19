@@ -8,14 +8,12 @@ export function compile(directory, file) {
   return new Promise((resolve, reject) => {
     return Promise.delay(0)
     .then(() => {
-      return getContractFile(directory, file)
-    }).then((file) => {
-      console.log('file', file)
-    //   return solcCompile(files)
-    // }).then((compiled) => {
-    //   return writeCompiledFile(compiled)
-    // }).then(() => {
-
+      return getContractData(directory, file)
+    }).then((data) => {
+      return solcCompile(data)
+    }).then((compiled) => {
+      console.log('compiled', compiled)
+      return true
     }).then(() => {
       resolve(true)
     }).catch((err) => {
@@ -24,7 +22,7 @@ export function compile(directory, file) {
   })
 }
 
-export function getContractFile(directory, file) {
+export function getContractData(directory, file) {
   console.log('### getting contract data')
   return new Promise((resolve, reject) => {
     return Promise.delay(0)
@@ -38,8 +36,19 @@ export function getContractFile(directory, file) {
   })
 }
 
-export function solcCompile(files) {
-  console.log('### compiling contracts')
+export function solcCompile(data) {
+  return new Promise((resolve, reject) => {
+    return Promise.delay(0)
+    .then(() => {
+      console.log('data', data)
+      return solc.compile(data)
+    }).then((compiled) => {
+      console.log('compiled')
+      resolve(compiled)
+    }).catch((err) => {
+      reject(err)
+    })
+  })
 }
 
 export function writeCompiledFile(compiled) {
