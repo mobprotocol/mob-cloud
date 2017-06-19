@@ -4,25 +4,36 @@ import solc from 'solc'
 const fs = Promise.promisifyAll(require('fs'))
 const jsonfile = Promise.promisifyAll(require('jsonfile'))
 
-export function compile(paths) {
+export function compile(directory, file) {
   return new Promise((resolve, reject) => {
     return Promise.delay(0)
     .then(() => {
-      return getContractFiles(paths)
-    }).then((files) => {
-      return solcCompile(files)
-    }).then((compiled) => {
-      return writeCompiledFile((compiled)
-    }).then(() => {
+      return getContractFile(directory, file)
+    }).then((file) => {
+      console.log('file', file)
+    //   return solcCompile(files)
+    // }).then((compiled) => {
+    //   return writeCompiledFile(compiled)
+    // }).then(() => {
       resolve(true)
     }).catch((err) => {
-      reject(true)
+      reject(err)
     })
   })
 }
 
-export function getContractFiles(paths) {
+export function getContractFile(directory, file) {
   console.log('### getting contract data')
+  return new Promise((resolve, reject) => {
+    return Promise.delay(0)
+    .then(() => {
+      return fs.readdirAsync(`${directory}/${file}`)
+    }).then((file) => {
+      resolve(file)
+    }).catch((err) => {
+      reject(err)
+    })
+  })
 }
 
 export function solcCompile(files) {
