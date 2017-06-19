@@ -45,3 +45,16 @@ export const contracts = [
     supply: 1000000000
   },
 ]
+
+export const pair = [
+  {
+    name: 'Mob',
+    ticker: 'MBO',
+    supply: 1000000000
+  },
+  {
+    name: 'Brave',
+    ticker: 'BAT',
+    supply: 1000000000
+  }
+]
