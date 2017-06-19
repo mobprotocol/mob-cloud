@@ -4,7 +4,8 @@
   "description": "instance of the mob protocol",
   "main": "index.js",
   "scripts": {
-    "create-permutation": "babel-node ./factory/index.js --presets es2015"
+    "create-permutation": "babel-node ./factory/index.js --presets es2015",
+    "api": "babel-node ./api/index.js --presets es2015"
   },
   "repository": {
     "type": "git",
@@ -28,6 +29,8 @@
   "dependencies": {
     "babel-cli": "^6.24.1",
     "bluebird": "^3.5.0",
-    "express": "^4.15.3"
+    "double-ended-queue": "^2.1.0-0",
+    "express": "^4.15.3",
+    "solc": "^0.4.11"
   }
 }
