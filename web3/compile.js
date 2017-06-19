@@ -21,6 +21,14 @@ export function compile(paths) {
   })
 }
 
-// export function getContractFiles(paths) {
-//   console.log('## getting contract data')
-// }
+export function getContractFiles(paths) {
+  console.log('### getting contract data')
+}
+
+export function solcCompile(files) {
+  console.log('### compiling contracts')
+}
+
+export function writeCompiledFile(compiled) {
+  console.log('### writing compiled artificats')
+}
