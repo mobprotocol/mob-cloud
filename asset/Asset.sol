@@ -33,6 +33,11 @@ contract Asset {
         return true;
     }
 
+    function allowance( address owner, address spender ) constant returns (uint) {
+        return approvals[owner][spender];
+    }
+
     function balanceOf(address who) constant returns (uint) {
         return balances[who];
     }
+}
