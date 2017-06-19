@@ -10,11 +10,11 @@ export function tokenPair() {
     return Promise.delay(0)
     .then(() => {
       return pair
-    }).map((token) => {
+    }).map((asset) => {
       return new Asset({
-        name: token.name,
-        ticker: token.ticker,
-        supply: token.supply
+        name: asset.name,
+        ticker: asset.ticker,
+        supply: asset.supply
       })
     }).then(() => {
       resolve(true)

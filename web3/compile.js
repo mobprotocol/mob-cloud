@@ -15,6 +15,8 @@ export function compile(directory, file) {
     // }).then((compiled) => {
     //   return writeCompiledFile(compiled)
     // }).then(() => {
+
+    }).then(() => {
       resolve(true)
     }).catch((err) => {
       reject(err)
@@ -29,7 +31,7 @@ export function getContractFile(directory, file) {
     .then(() => {
       return fs.readFileAsync(`${directory}/${file}`)
     }).then((file) => {
-      resolve(file)
+      resolve(file.toString())
     }).catch((err) => {
       reject(err)
     })
