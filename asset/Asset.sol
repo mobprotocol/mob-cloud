@@ -24,4 +24,8 @@ contract Asset {
         balances[to] += value;
         Transfer( msg.sender, to, value );
     }
+
+    function balanceOf(address who) constant returns (uint) {
+        return balances[who];
+    }
 }
