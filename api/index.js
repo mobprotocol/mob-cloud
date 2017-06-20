@@ -3,8 +3,9 @@ import Promise from 'bluebird'
 
 const app = express()
 
-app.get('/balance', () => {
-
+app.get('/balance', (req, res) => {
+  console.log('req', JSON.stringify(req.body))
+  res.end(JSON.stringify({ balance: 10000 }))
 })
 
 app.listen(3000, () => {
