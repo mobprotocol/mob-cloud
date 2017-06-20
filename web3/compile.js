@@ -52,11 +52,8 @@ export function writeCompiledFile(directory, file, compiled) {
   return new Promise((resolve, reject) => {
     return Promise.delay(0)
     .then(() => {
-      console.log('compiled', compiled)
-      let fileName = file.slice(0, -3)
-      console.log('fileName', fileName)
-      console.log('writing to', `${directory}/${file}.compiled.json`)
-      return jsonfile.writeFileAsync(`${directory}/${fileName}.compiled.json`)
+      let fileName = file.slice(0, -4)
+      return jsonfile.writeFileAsync(`${directory}/${fileName}.compiled.json`, compiled)
     }).then(() => {
       resolve(true)
     }).catch((err) => {
