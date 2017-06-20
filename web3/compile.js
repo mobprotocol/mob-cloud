@@ -12,8 +12,7 @@ export function compile(directory, file) {
     }).then((data) => {
       return solcCompile(data)
     }).then((compiled) => {
-      console.log('compiled', compiled)
-      return true
+      return writeCompiledFile(directory, file, compiled)
     }).then(() => {
       resolve(true)
     }).catch((err) => {
@@ -40,10 +39,8 @@ export function solcCompile(data) {
   return new Promise((resolve, reject) => {
     return Promise.delay(0)
     .then(() => {
-      console.log('data', data)
       return solc.compile(data)
     }).then((compiled) => {
-      console.log('compiled')
       resolve(compiled)
     }).catch((err) => {
       reject(err)
@@ -51,6 +48,19 @@ export function solcCompile(data) {
   })
 }
 
-export function writeCompiledFile(compiled) {
-  console.log('### writing compiled artificats')
+export function writeCompiledFile(directory, file, compiled) {
+  return new Promise((resolve, reject) => {
+    return Promise.delay(0)
+    .then(() => {
+      console.log('compiled', compiled)
+      let fileName = file.slice(0, -3)
+      console.log('fileName', fileName)
+      console.log('writing to', `${directory}/${file}.compiled.json`)
+      return jsonfile.writeFileAsync(`${directory}/${fileName}.compiled.json`)
+    }).then(() => {
+      resolve(true)
+    }).catch((err) => {
+      reject(err)
+    })
+  })
 }
