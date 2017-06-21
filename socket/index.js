@@ -8,3 +8,7 @@ socket.on('connection', (socket) => {
     console.log('### RECEIVED DATA FROM CLIENT', data)
   })
 })
+
+export function sendData(data) {
+  socket.write(data)
+}
