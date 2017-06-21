@@ -4,7 +4,8 @@
   "description": "instance of the mob protocol",
   "main": "index.js",
   "scripts": {
-    "create-permutation": "babel-node ./factory/index.js --presets es2015",
+    "token-factory": "babel-node ./factory/index.js --presets es2015",
+    "create-network": "babel-node ./network/index.js --presets es2015",
     "api": "babel-node ./api/index.js --presets es2015",
     "socket": "babel-node ./socket/index.js --presets es2015"
   },
