@@ -9,6 +9,10 @@ app.get('/balance', (req, res) => {
   res.end(JSON.stringify({ balance: 10000 }))
 })
 
+app.get('/orderbook', (req, res) => {
+  console.log('### hit orderbook endpoint', req.body)
+})
+
 app.listen(3000, () => {
   console.log('### Restful server listening on port 3000')
 })
