@@ -4,8 +4,8 @@ import Match from '../match/index'
 import Clean from '../clean/index'
 
 export default class Permutation {
-  constructor() {
-    console.log('made it to Permutation constructor')
+  constructor(params) {
+    console.log('params', params)
     this.orderbook = new Orderbook()
     this.simulation = new Simulation({ orderbook: this.orderbook })
     this.match = new Match({ orderbook: this.orderbook })

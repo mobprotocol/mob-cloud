@@ -2,6 +2,7 @@ import Promise from 'bluebird'
 
 import Permutation from '../permutation/index'
 import { contracts} from '../factory/contracts'
+import { db } from '../leveldb/index'
 
 class Network {
   constructor() {
@@ -41,7 +42,11 @@ class Network {
         return this.getConnectedTopology()
       }).map((permutation) => {
         console.log('### CREATING PERMUTATION FOR TOKEN PAIR', contracts[permutation.tokenA].name, contracts[permutation.tokenB].name)
-        this.permutations[`${contracts[permutation.tokenA].name}_${contracts[permutation.tokenB]}`] = new Permutation()
+        this.permutations[`${contracts[permutation.tokenA].name}_${contracts[permutation.tokenB]}`] = new Permutation({
+          tokenA: permutation.tokenA,
+          tokenB: permutation.tokenB,
+          db: db
+        })
       }).then(() => {
         resolve(true)
       }).catch((err) => {

@@ -5,8 +5,8 @@ import Clean from '../clean/index'
 
 export default class Permutation {
   constructor(params) {
-    console.log('made it to Permutation constructor')
-    this.orderbook = new Orderbook({ tokenA: params.tokenA, tokenB: params.tokenB, db: params.db})
+    console.log('params', params)
+    this.orderbook = new Orderbook({ hello: 'world'})
     this.simulation = new Simulation({ orderbook: this.orderbook })
     this.match = new Match({ orderbook: this.orderbook })
     this.clean = new Clean({ orderbook: this.orderbook })
