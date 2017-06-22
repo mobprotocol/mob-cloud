@@ -41,7 +41,7 @@ class Network {
         return this.getConnectedTopology()
       }).map((permutation) => {
         console.log('### CREATING PERMUTATION FOR TOKEN PAIR', contracts[permutation.tokenA].name, contracts[permutation.tokenB].name)
-        this.permutations[`${contracts[permutation.tokenA].name}_${contracts[permutations.tokenB]}`] = new Permutation()
+        this.permutations[`${contracts[permutation.tokenA].name}_${contracts[permutation.tokenB]}`] = new Permutation()
       }).then(() => {
         resolve(true)
       }).catch((err) => {
