@@ -6,13 +6,22 @@ import { contracts} from '../factory/contracts'
 
 export function fullyConnectedTopology() {
   return new Promise((resolve, reject) => {
+    let permutations = []
     return Promise.delay(0)
     .then(() => {
       return Object.keys(contracts)
     }).map((contract) => {
-      console.log('contract', contract)
-      return contract.ticker
+      const baseContract = contract
+      return Object.keys(contracts).map((contract) => {
+        if (contract > baseContract) {
+          permutations.push({
+            tokenA: baseContract,
+            tokenB: contract
+          })
+        }
+      })
     }).then(() => {
+      console.log('permutations', permutations.length)
       console.log('made it')
       resolve(true)
     }).catch((err) => {
@@ -20,5 +29,9 @@ export function fullyConnectedTopology() {
     })
   })
 }
+
+
+
+
 
 fullyConnectedTopology()
