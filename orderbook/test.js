@@ -59,8 +59,15 @@ export function tests() {
       console.log('sellA book', orderbook.sellA)
       return orderbook.submitSellB(sell_order)
     }).then(() => {
+      return testSortA()
+    }).then(() => {
+      console.log('sellA book', orderbook.sellA)
+      return testSortB()
+    }).then(() => {
       console.log('sellB book', orderbook.sellB)
-      return
+      resolve(true)
+    }).catch((err) => {
+      reject(err)
     })
   })
 }
