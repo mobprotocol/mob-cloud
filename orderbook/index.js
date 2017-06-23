@@ -15,21 +15,16 @@ export default class Orderbook {
     this.sellA.push(order)
   }
 
-  insertionSortA() {
-    return new Promise((resolve, reject) => {
-      return Promise.delay(0)
-      .then(() => {
-        return this.sellA
-      }).map((sell) => {
-        
-      })
-    })
+  insertionSortA(order) {
+    for (const order in this.sellA) {
+      console.log('order', order)
+    }
   }
 
   insertionSortB() {
-    return new Promise((resolve, reject) => {
-      return Prom
-    })
+    for (const order in this.sellB) {
+      console.log('order', order)
+    }
   }
 
   submitSellB(order) {

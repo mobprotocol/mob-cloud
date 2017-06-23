@@ -29,7 +29,10 @@ export function tests() {
     .then(() => {
       return new Orderbook()
     }).then((Orderbook) => {
-      cnosole.log('Orderbook', Orderbook)
+      console.log('Orderbook', Orderbook)
+      return Orderbook.submitSellA(sell_order)
+    }).then(() => {
+      console.log('Orderbook', typeof Orderbook.sellA)
     })
   })
 }
