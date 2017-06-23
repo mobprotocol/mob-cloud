@@ -14,6 +14,7 @@ export default class Orderbook {
   submitSellA(order) {
     console.log('### submitting sellA order', order)
     this.sellA.push(order)
+    this.insertionSortA()
   }
 
   insertionSortA(order) {
@@ -31,5 +32,6 @@ export default class Orderbook {
   submitSellB(order) {
     console.log('### submitting sellB order', order)
     this.sellB.push(order)
+    this.insertionSortB()
   }
 }

@@ -4,14 +4,14 @@ import Orderbook from './index'
 
 let orderbook
 
-const batch_a_amount = 10
-const batch_b_amount = 10
+let batch_a_amount = 10
+let batch_b_amount = 10
 
 export function testSortA() {
   return new Promise((resolve, reject) => {
     return Promise.delay(10)
     .then(() => {
-      return orderbook.sellA(sell_order)
+      return orderbook.submitSellA(sell_order)
     }).then(() => {
       batch_a_amount = batch_a_amount - 1
       if (batch_a_amount <= 0) {
@@ -29,7 +29,7 @@ export function testSortB() {
   return new Promise((resolve, reject) => {
     return new promise.delay(10)
     .then(() => {
-      return orderbook.sellB(sell_order)
+      return orderbook.submitSellB(sell_order)
     }).then(() => {
       batch_b_amount = batch_b_amount--
       if(batch_b_amount <= 0) {
