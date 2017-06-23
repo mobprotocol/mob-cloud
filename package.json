@@ -7,7 +7,8 @@
     "token-factory": "babel-node ./factory/index.js --presets es2015",
     "create-network": "babel-node ./network/index.js --presets es2015",
     "api": "babel-node ./api/index.js --presets es2015",
-    "socket": "babel-node ./socket/index.js --presets es2015"
+    "socket": "babel-node ./socket/index.js --presets es2015",
+    "orderbook-tests": "babel-node ./orderbook/test.js --presets es2015"
   },
   "repository": {
     "type": "git",
@@ -33,6 +34,7 @@
     "bluebird": "^3.5.0",
     "double-ended-queue": "^2.1.0-0",
     "express": "^4.15.3",
+    "immutable": "^3.8.1",
     "jsonfile": "^3.0.0",
     "level": "^1.7.0",
     "level-sublevel": "^6.6.1",
