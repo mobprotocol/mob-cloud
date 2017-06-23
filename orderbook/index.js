@@ -5,6 +5,7 @@ import sublevel from 'level-sublevel'
 export default class Orderbook {
   constructor(params) {
     console.log('### made it to Orderbook constructor')
+    this.hello = 'world'
     this.sellA = []
     this.sellB = []
     // this.db = params.db.sublevel(`orderbook_${params.tokenA}_params${params.tokenB}`)

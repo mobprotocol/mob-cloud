@@ -2,6 +2,8 @@ import Promise from 'bluebird'
 
 import Orderbook from './index'
 
+let orderbook
+
 export function submitSellA() {
 
 }
@@ -27,12 +29,11 @@ export function tests() {
   return new Promise((resolve, reject) => {
     return Promise.delay(0)
     .then(() => {
-      return new Orderbook()
-    }).then((Orderbook) => {
-      console.log('Orderbook', Orderbook)
-      return Orderbook.submitSellA(sell_order)
+      return orderbook = new Orderbook()
     }).then(() => {
-      console.log('Orderbook', typeof Orderbook.sellA)
+      return orderbook.submitSellA(sell_order)
+    }).then(() => {
+      console.log('sellA book', orderbook.sellA)
     })
   })
 }
