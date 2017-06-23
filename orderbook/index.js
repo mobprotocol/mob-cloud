@@ -16,11 +16,20 @@ export default class Orderbook {
   }
 
   insertionSortA() {
-
+    return new Promise((resolve, reject) => {
+      return Promise.delay(0)
+      .then(() => {
+        return this.sellA
+      }).map((sell) => {
+        
+      })
+    })
   }
 
   insertionSortB() {
-
+    return new Promise((resolve, reject) => {
+      return Prom
+    })
   }
 
   submitSellB(order) {
