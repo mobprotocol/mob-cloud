@@ -34,6 +34,9 @@ export function tests() {
       return orderbook.submitSellA(sell_order)
     }).then(() => {
       console.log('sellA book', orderbook.sellA)
+      return orderbook.submitSellB(sell_order)
+    }).then(() => {
+      console.log('sellB book', orderbook.sellB)
     })
   })
 }
