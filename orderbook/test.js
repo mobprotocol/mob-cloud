@@ -59,13 +59,12 @@ export function tests() {
       console.log('sellA book', orderbook.sellA)
       return orderbook.submitSellB(sell_order)
     }).then(() => {
-    //   return testSortA()
-    // }).then(() => {
-    //   console.log('sellA book', orderbook.sellA)
-    //   return testSortB()
-    // }).then(() => {
-    //   console.log('sellB book', orderbook.sellB)
-    console.log('sellA', orderbook.sellA)
+      return testSortA()
+    }).then(() => {
+      console.log('sellA book', orderbook.sellA)
+      return testSortB()
+    }).then(() => {
+      console.log('sellB book', orderbook.sellB)
       resolve(true)
     }).catch((err) => {
       reject(err)
@@ -73,4 +72,12 @@ export function tests() {
   })
 }
 
-tests()
+// tests()
+
+function testRandomPrice() {
+  setInterval(() => {
+    console.log('order', sell_order)
+  }, 3000)
+}
+
+testRandomPrice()

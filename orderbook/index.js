@@ -22,11 +22,11 @@ export default class Orderbook {
     //     break
     //   }
     // }
-    this.sellA = this.sellA.push(order)
     this.sellA.forEach((entry, i) => {
       console.log('entry', entry)
       console.log('i', i)
       if (entry.price < order.price) {
+        console.log('inser here', i)
         index = i
       }
     })
@@ -46,11 +46,11 @@ export default class Orderbook {
     //     break
     //   }
     // }
-    this.sellB = this.sellB.push(order)
     this.sellB.forEach((entry, i) => {
       console.log('entry', entry)
       console.log('i', i)
       if (entry.price < order.price) {
+        console.log('insert here', i)
         index = i
       }
     })
