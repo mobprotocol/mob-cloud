@@ -13,9 +13,8 @@ export default class Orderbook {
   }
 
   submitSellA(order) {
-    // console.log('### submitting sellA order', order)
-    // let index
-    // console.log("this.sellA", this.sellA)
+    console.log('### submitting sellA order', order)
+    let index
     // for (const entry in this.sellA) {
     //   console.log('entry', entry)
     //   if (this.sellA[entry].price < order.price) {
@@ -23,31 +22,37 @@ export default class Orderbook {
     //     break
     //   }
     // }
-    // this.sellA.splice(index, 0, order)
     this.sellA = this.sellA.push(order)
-    console.log('order', order)
-    console.log('list A', this.sellA)
-
-    const avengersList = new List(['ironMan', 'captainAmerica']);
-
-    // append blackWidow
-    console.log(avengersList.push('blackWidow'));
+    this.sellA.forEach((entry, i) => {
+      console.log('entry', entry)
+      if (entry.price < order.price) {
+        index = i
+      }
+    })
+    if(index) {
+      this.sellA = this.sellA.splice(index, 0, order)
+    } else {
+      this.sellA = this.sellA.push(order)
+    }
   }
 
   submitSellB(order) {
-    // console.log('### submitting sellB order', order)
-    // let index
+    console.log('### submitting sellB order', order)
+    let index
     // for (const entry in this.sellB) {
     //   if (this.sellB[entry].price < order.price) {
     //     index = entry
     //     break
     //   }
     // }
-    // this.sellB.splice(index, 0, order)
-    this.sellB = this.sellB.push(10)
-    console.log('order', order)
-    console.log('list B', this.sellB)
-    list.push(10)
-    console.log('list example', list)
+    this.sellB = this.sellB.push(order)
+    this.sellB.forEach((entry) => {
+      console.log('entry', entry)
+    })
+    if(index) {
+      this.sellB = this.sellB.splice(index, 0, order)
+    } else {
+      this.sellB = this.sellB.push(order)
+    }
   }
 }
