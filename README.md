@@ -12,4 +12,4 @@ git clone https://github.com/mobprotocol/mob.git && cd mob-instance/
 
 ## Run
 
-npm i && npm run create-permutation
+npm i && npm run create-network
