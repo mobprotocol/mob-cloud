@@ -15,22 +15,12 @@ export default class Orderbook {
   submitSellA(order) {
     console.log('### submitting sellA order', order)
     let index
-    // for (const entry in this.sellA) {
-    //   console.log('entry', entry)
-    //   if (this.sellA[entry].price < order.price) {
-    //     index = entry
-    //     break
-    //   }
-    // }
     this.sellA.forEach((entry, i) => {
-      console.log('entry', entry)
-      console.log('i', i)
       if (entry.price < order.price) {
-        console.log('inser here', i)
         index = i
       }
     })
-    if(index) {
+    if(index && index > 0) {
       this.sellA = this.sellA.splice(index, 0, order)
     } else {
       this.sellA = this.sellA.push(order)
@@ -40,17 +30,8 @@ export default class Orderbook {
   submitSellB(order) {
     console.log('### submitting sellB order', order)
     let index
-    // for (const entry in this.sellB) {
-    //   if (this.sellB[entry].price < order.price) {
-    //     index = entry
-    //     break
-    //   }
-    // }
     this.sellB.forEach((entry, i) => {
-      console.log('entry', entry)
-      console.log('i', i)
       if (entry.price < order.price) {
-        console.log('insert here', i)
         index = i
       }
     })
