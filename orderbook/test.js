@@ -11,7 +11,7 @@ export function testSortA() {
   return new Promise((resolve, reject) => {
     return Promise.delay(10)
     .then(() => {
-      return orderbook.submitSellA(sell_order)
+      return orderbook.submitSellA(generateOrder())
     }).then(() => {
       batch_a_amount = batch_a_amount - 1
       if (batch_a_amount <= 0) {
@@ -29,7 +29,7 @@ export function testSortB() {
   return new Promise((resolve, reject) => {
     return new promise.delay(10)
     .then(() => {
-      return orderbook.submitSellB(sell_order)
+      return orderbook.submitSellB(generateOrder())
     }).then(() => {
       batch_b_amount = batch_b_amount--
       if(batch_b_amount <= 0) {
@@ -61,10 +61,10 @@ export function tests() {
     .then(() => {
       return orderbook = new Orderbook()
     }).then(() => {
-      return orderbook.submitSellA(sell_order)
+      return orderbook.submitSellA(generateOrder())
     }).then(() => {
       console.log('sellA book', orderbook.sellA)
-      return orderbook.submitSellB(sell_order)
+      return orderbook.submitSellB(generateOrder())
     }).then(() => {
       return testSortA()
     }).then(() => {
@@ -79,12 +79,10 @@ export function tests() {
   })
 }
 
-// tests()
+tests()
 
 function testRandomPrice() {
   setInterval(() => {
     console.log('order', generateOrder())
   }, 3000)
 }
-
-testRandomPrice()
