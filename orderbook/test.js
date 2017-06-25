@@ -48,6 +48,13 @@ const sell_order = {
   price: Math.floor(Math.random()*100) + 1
 }
 
+export function generateOrder() {
+  return ({
+    quantity: Math.floor(Math.random()*100) + 1,
+    price: Math.floor(Math.random()*100) + 1
+  })
+}
+
 export function tests() {
   return new Promise((resolve, reject) => {
     return Promise.delay(0)
@@ -76,7 +83,7 @@ export function tests() {
 
 function testRandomPrice() {
   setInterval(() => {
-    console.log('order', sell_order)
+    console.log('order', generateOrder())
   }, 3000)
 }
 
