@@ -25,6 +25,7 @@ export default class Orderbook {
     this.sellA = this.sellA.push(order)
     this.sellA.forEach((entry, i) => {
       console.log('entry', entry)
+      console.log('i', i)
       if (entry.price < order.price) {
         index = i
       }
@@ -46,8 +47,12 @@ export default class Orderbook {
     //   }
     // }
     this.sellB = this.sellB.push(order)
-    this.sellB.forEach((entry) => {
+    this.sellB.forEach((entry, i) => {
       console.log('entry', entry)
+      console.log('i', i)
+      if (entry.price < order.price) {
+        index = i
+      }
     })
     if(index) {
       this.sellB = this.sellB.splice(index, 0, order)
