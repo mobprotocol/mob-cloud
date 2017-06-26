@@ -42,7 +42,7 @@ export default class Match {
   }
 
   chooseSide() {
-    return Math.floor(Math.random())
+    return Math.round(Math.random())
   }
 
   calculateOrder() {
