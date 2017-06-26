@@ -26,9 +26,16 @@ export default class Match {
       .then(() => {
         return this.chooseSide()
       }).then((side) => {
-        return this.getOrder(side)
-      }).then(() => {
-        this.processOrder()
+        switch(side) {
+          case 0:
+            return processOrderA()
+          case 1:
+            return processOrderB()
+          default:
+            return ProcessOrderA()
+        }
+      }).then((order) => {
+    
       }).then(() => {
         resolve(true)
       })
@@ -39,21 +46,14 @@ export default class Match {
     return Math.floor(Math.random())
   }
 
-  getOrder(side) {
-    switch(side) {
-      case 0:
-        return orderbook.sellA.last()
-        break
-      case 1:
-        return orderbook.sellB.last()
-        break
-      default:
-        return false
-        break
-    }
+  processOrderA() {
+    return new Promise((resolve, reject) => {
+      return Promise.delay(0)
+      .then(() => {
+        return this.orderbook.sellA.last()
+      })
+    })
   }
 
-  processOrder() {
-
-  }
+  processOrderB()
 }
