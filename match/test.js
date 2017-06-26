@@ -15,10 +15,10 @@ Promise.delay(0)
 }).then(() => {
   return fillOrderbook()
 }).then(() => {
-  console.log('orderbook size', orderbook.sellA.size)
-  orderbook.sellA.forEach((element) => {
-    console.log('element', element)
-  })
+  console.log('orderbook size', orderbook.sellA.last())
+  // orderbook.sellA.forEach((element) => {
+  //   console.log('element', element)
+  // })
   return matchAgent = new Match({
     orderbook: orderbook
   })
