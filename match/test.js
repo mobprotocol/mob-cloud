@@ -2,7 +2,6 @@ import Promise from 'bluebird'
 
 import Match from './index'
 import Orderbook from '../orderbook/index'
-import { testSortA, testSortB, generateOrder } from '../orderbook/test'
 
 let orderbook
 let matchAgent
@@ -42,4 +41,46 @@ export function fillOrderbook() {
       reject(err)
     })
   })
+}
+
+let batch_a_amount = 10
+let batch_b_amount = 10
+
+export function testSortA() {
+  return Promise.delay(500)
+  .then(() => {
+    return orderbook.submitSellA(generateOrder())
+  }).then(() => {
+    batch_a_amount = batch_a_amount - 1
+    if (batch_a_amount <= 0) {
+      console.log('ending')
+      return true
+    } else {
+      return testSortA()
+    }
+  }).catch((err) => {
+    console.log('err', err)
+  })
+}
+
+export function testSortB() {
+  return new Promise.delay(500)
+  .then(() => {
+    return orderbook.submitSellB(generateOrder())
+  }).then(() => {
+    batch_b_amount = batch_b_amount - 1
+    if(batch_b_amount <= 0) {
+      return true
+    } else {
+      return testSortB()
+    }
+  }).catch((err) => {
+    console.log('err', err)
+  })
+}
+
+function testRandomPrice() {
+  setInterval(() => {
+    console.log('order', generateOrder())
+  }, 3000)
 }
