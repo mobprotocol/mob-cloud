@@ -10,7 +10,7 @@ export default class Match {
     return new Promise((resolve, reject) => {
       return Promise.delay(1000)
       .then(() => {
-        return this.orderbook.sellA.peekFront()
+        return this.matchOrder()
       }).then((element) => {
         console.log('first element', element)
         return this.daemon()
@@ -20,4 +20,30 @@ export default class Match {
     })
   }
 
+  matchOrder() {
+    return new Promise((resolve, reject) => {
+      return Promise.delay(0)
+      .then(() => {
+        return this.chooseSide()
+      }).then(() => {
+        return this.getOrder()
+      }).then(() => {
+        this.processOrder()
+      }).then(() => {
+        resolve(true)
+      })
+    })
+  }
+
+  chooseSide() {
+
+  }
+
+  getOrder() {
+
+  }
+
+  processOrder() {
+
+  }
 }
