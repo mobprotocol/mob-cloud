@@ -27,21 +27,21 @@ export function testSortA() {
 }
 
 export function testSortB() {
-  return new Promise((resolve, reject) => {
+  // return new Promise((resolve, reject) => {
     return new Promise.delay(500)
     .then(() => {
       return orderbook.submitSellB(generateOrder())
     }).then(() => {
-      batch_b_amount = batch_b_amount--
+      batch_b_amount = batch_b_amount - 1
       if(batch_b_amount <= 0) {
-        resolve(true)
+        return true
       } else {
         return testSortB()
       }
     }).catch((err) => {
-      reject(err)
+      console.log('err', err)
     })
-  })
+  // })
 }
 
 const sell_order = {
@@ -71,6 +71,7 @@ export function tests() {
     //   console.log('sellA book', orderbook.sellA)
       return testSortB()
     }).then(() => {
+      console.log('here')
       console.log('sellB book', orderbook.sellB)
       resolve(true)
     }).catch((err) => {
