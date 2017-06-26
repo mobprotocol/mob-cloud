@@ -57,15 +57,48 @@ export default class Match {
     })
   }
 
-  submitOrder() {
+  processOrderA(order) {
+    return new Promise((resolve, reject) => {
+      return Promise.delay(0)
+      .then(() => {
+        console.log('### processing order A')
+        return this.getOrderSetB()
+      }).then(() => {
 
+      })
+    })
   }
 
-  processOrderA() {
-
+  getOrderSetB(order) {
+    return Promise.delay(0)
+    .then(() => {
+      const first = this.orderbook.sellB.size
+      console.log('this.orderbook.sellB', first)
+      this.orderbook.sellB.last()
+    }).then((position) => {
+      console.log('corresponding position', position)
+    })
   }
 
-  processOrderB() {
+  processOrderB(order) {
+    return new Promise((resolve, reject) => {
+      return Promise.delay(0)
+      .then(() => {
+        console.log('### processing order B')
+        return this.getOrderSetA()
+      }).then(() => {
 
+      })
+    })
+  }
+
+  getOrderSetA(order) {
+    return Promise.delay(0)
+    .then(() => {
+      console.log('this.orderbook.sellA', this.orderbook.sellA)
+      return this.orderbook.sellA.last()
+    }).then((position) => {
+      console.log('corresponding order', position)
+    })
   }
 }
