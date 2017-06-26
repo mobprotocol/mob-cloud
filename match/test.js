@@ -16,7 +16,6 @@ Promise.delay(0)
 }).then(() => {
   return fillOrderbook()
 }).then(() => {
-  console.log('orderbook', )
   orderbook.sellA.forEach((element) => {
     console.log('element', element)
   })

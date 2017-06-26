@@ -51,6 +51,8 @@ export default class Match {
       return Promise.delay(0)
       .then(() => {
         return this.orderbook.sellA.last()
+      }).then(() => {
+        resolve(true)
       })
     })
   }
@@ -63,5 +65,7 @@ export default class Match {
 
   }
 
-  processOrderB()
+  processOrderB() {
+
+  }
 }
