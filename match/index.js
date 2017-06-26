@@ -105,14 +105,21 @@ export default class Match {
     })
   }
 
-  calculateSettlements(orderA, orderB) {
-    if (1/orderB.price < orderA.price) {
+  calculateSettlements(order1, order2) {
+    if (1/order1.price < order2.price) {
       return
     }
+    const settlements = []
     return new Promise((resolve, reject) => {
       return Promise.delay(0)
       .then(() => {
-        
+        if (order1.quantity < order2.qantity * order2.price) {
+          settlements.push({ from: '0x', to: '0x', quantity: order1.quantity, token: '0x'})
+          settlements.push({ from: '0x', to: '0x', quantity: order1.price * order1.quantity })
+          settlements.push({ from: '0x', to: '0x', quantity: ((1/order2.price) * order1.quantity) - (order1.price * order1.quantity) })
+        } else {
+
+        }
       }).then(() => {
 
       })
