@@ -11,8 +11,7 @@ export default class Match {
       return Promise.delay(1000)
       .then(() => {
         return this.matchOrder()
-      }).then((element) => {
-        console.log('first element', element)
+      }).then(() => {
         return this.daemon()
       }).catch((err) => {
         reject(err)
@@ -64,7 +63,9 @@ export default class Match {
         console.log('### processing order A')
         return this.getOrderSetB()
       }).then(() => {
-
+        resolve(true)
+      }).catch((err) => {
+        reject(err)
       })
     })
   }
@@ -72,9 +73,9 @@ export default class Match {
   getOrderSetB(order) {
     return Promise.delay(0)
     .then(() => {
-      const first = this.orderbook.sellB.size
-      console.log('this.orderbook.sellB', first)
-      this.orderbook.sellB.last()
+      // const first = this.orderbook.sellB.last()
+      // console.log('this.orderbook.sellB', first)
+      return this.orderbook.sellB.last()
     }).then((position) => {
       console.log('corresponding position', position)
     })
@@ -87,7 +88,9 @@ export default class Match {
         console.log('### processing order B')
         return this.getOrderSetA()
       }).then(() => {
-
+        resolve(true)
+      }).catch((err) => {
+        reject(err)
       })
     })
   }
@@ -99,6 +102,7 @@ export default class Match {
       return this.orderbook.sellA.last()
     }).then((position) => {
       console.log('corresponding order', position)
+
     })
   }
 }
