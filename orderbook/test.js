@@ -5,7 +5,7 @@ import Orderbook from './index'
 let orderbook
 
 let batch_a_amount = 10
-let batch_b_amount = 10
+let batch_b_amount = 4
 
 export function testSortA() {
   return new Promise((resolve, reject) => {
@@ -27,21 +27,19 @@ export function testSortA() {
 }
 
 export function testSortB() {
-  // return new Promise((resolve, reject) => {
-    return new Promise.delay(500)
-    .then(() => {
-      return orderbook.submitSellB(generateOrder())
-    }).then(() => {
-      batch_b_amount = batch_b_amount - 1
-      if(batch_b_amount <= 0) {
-        return true
-      } else {
-        return testSortB()
-      }
-    }).catch((err) => {
-      console.log('err', err)
-    })
-  // })
+  return new Promise.delay(500)
+  .then(() => {
+    return orderbook.submitSellB(generateOrder())
+  }).then(() => {
+    batch_b_amount = batch_b_amount - 1
+    if(batch_b_amount <= 0) {
+      return true
+    } else {
+      return testSortB()
+    }
+  }).catch((err) => {
+    console.log('err', err)
+  })
 }
 
 const sell_order = {
@@ -62,17 +60,18 @@ export function tests() {
     .then(() => {
       return orderbook = new Orderbook()
     }).then(() => {
-      return orderbook.submitSellA(generateOrder())
-    }).then(() => {
-      return orderbook.submitSellB(generateOrder())
-    }).then(() => {
+    //   return orderbook.submitSellA(generateOrder())
+    // }).then(() => {
+    //   return orderbook.submitSellB(generateOrder())
+    // }).then(() => {
     //   return testSortA()
     // }).then(() => {
     //   console.log('sellA book', orderbook.sellA)
       return testSortB()
     }).then(() => {
-      console.log('here')
-      console.log('sellB book', orderbook.sellB)
+      orderbook.sellB.forEach((element) => {
+        console.log('element', element)
+      })
       resolve(true)
     }).catch((err) => {
       reject(err)

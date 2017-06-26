@@ -2,7 +2,7 @@ import Deque from 'double-ended-queue'
 import rp from 'request-promise'
 import sublevel from 'level-sublevel'
 import { List } from 'immutable'
-let list = List([1, 2])
+
 export default class Orderbook {
   constructor(params) {
     console.log('### made it to Orderbook constructor')
@@ -20,7 +20,7 @@ export default class Orderbook {
         index = i
       }
     })
-    if(index && index > 0) {
+    if(index) {
       this.sellA = this.sellA.splice(index, 0, order)
     } else {
       this.sellA = this.sellA.push(order)
@@ -32,10 +32,15 @@ export default class Orderbook {
     let index
     this.sellB.forEach((entry, i) => {
       if (entry.price < order.price) {
+        console.log('entry.price', entry.price, order.price, i)
         index = i
       }
     })
-    if(index) {
+    console.log('index', index)
+    if (index == 0) {
+      this.sellB = this.sellB.unshift(order)
+    } elseif (index) {
+      console.log('splicing', index)
       this.sellB = this.sellB.splice(index, 0, order)
     } else {
       this.sellB = this.sellB.push(order)
