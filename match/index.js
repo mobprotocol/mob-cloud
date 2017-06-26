@@ -28,11 +28,11 @@ export default class Match {
       }).then((side) => {
         switch(side) {
           case 0:
-            return processOrderA()
+            return this.processOrderA()
           case 1:
-            return processOrderB()
+            return this.processOrderB()
           default:
-            return ProcessOrderA()
+            return this.ProcessOrderA()
         }
       }).then((order) => {
 

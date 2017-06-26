@@ -19,7 +19,9 @@ Promise.delay(0)
   orderbook.sellA.forEach((element) => {
     console.log('element', element)
   })
-  return true
+  return matchAgent = new Match({
+    orderbook: orderbook
+  })
 }).then(() => {
 
 }).catch((err) => {
