@@ -35,7 +35,7 @@ export default class Match {
             return ProcessOrderA()
         }
       }).then((order) => {
-    
+
       }).then(() => {
         resolve(true)
       })
@@ -46,13 +46,21 @@ export default class Match {
     return Math.floor(Math.random())
   }
 
-  processOrderA() {
+  calculateOrder() {
     return new Promise((resolve, reject) => {
       return Promise.delay(0)
       .then(() => {
         return this.orderbook.sellA.last()
       })
     })
+  }
+
+  submitOrder() {
+
+  }
+
+  processOrderA() {
+
   }
 
   processOrderB()
