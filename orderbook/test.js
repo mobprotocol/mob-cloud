@@ -64,9 +64,9 @@ export function tests() {
     // }).then(() => {
     //   return orderbook.submitSellB(generateOrder())
     // }).then(() => {
-    //   return testSortA()
-    // }).then(() => {
-    //   console.log('sellA book', orderbook.sellA)
+      return testSortA()
+    }).then(() => {
+      console.log('sellA book', orderbook.sellA)
       return testSortB()
     }).then(() => {
       orderbook.sellB.forEach((element) => {
