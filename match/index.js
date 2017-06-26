@@ -3,6 +3,7 @@ import Promise from 'bluebird'
 export default class Match {
   constructor(params) {
     this.orderbook = params.orderbook
+    this.settlement = params.settlement
     this.daemon()
   }
 
@@ -77,7 +78,9 @@ export default class Match {
       // console.log('this.orderbook.sellB', first)
       return this.orderbook.sellB.last()
     }).then((position) => {
+
       console.log('corresponding position', position)
+      return
     })
   }
 
@@ -98,7 +101,6 @@ export default class Match {
   getOrderSetA(order) {
     return Promise.delay(0)
     .then(() => {
-      console.log('this.orderbook.sellA', this.orderbook.sellA)
       return this.orderbook.sellA.last()
     }).then((position) => {
       console.log('corresponding order', position)
