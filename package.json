@@ -8,7 +8,8 @@
     "create-network": "babel-node ./network/index.js --presets es2015",
     "api": "babel-node ./api/index.js --presets es2015",
     "socket": "babel-node ./socket/index.js --presets es2015",
-    "orderbook-tests": "babel-node ./orderbook/test.js --presets es2015"
+    "orderbook-tests": "babel-node ./orderbook/test.js --presets es2015",
+    "matching-tests": "babel-node ./match/test.js --presets e2015" 
   },
   "repository": {
     "type": "git",
