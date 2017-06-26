@@ -25,8 +25,8 @@ export default class Match {
       return Promise.delay(0)
       .then(() => {
         return this.chooseSide()
-      }).then(() => {
-        return this.getOrder()
+      }).then((side) => {
+        return this.getOrder(side)
       }).then(() => {
         this.processOrder()
       }).then(() => {
@@ -36,11 +36,21 @@ export default class Match {
   }
 
   chooseSide() {
-
+    return Math.floor(Math.random())
   }
 
-  getOrder() {
-
+  getOrder(side) {
+    switch(side) {
+      case 0:
+        return orderbook.sellA.last()
+        break
+      case 1:
+        return orderbook.sellB.last()
+        break
+      default:
+        return false
+        break
+    }
   }
 
   processOrder() {
