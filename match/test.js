@@ -43,9 +43,6 @@ export function fillOrderbook() {
   })
 }
 
-let batch_a_amount = 10
-let batch_b_amount = 10
-
 export function testSortA() {
   return Promise.delay(500)
   .then(() => {
@@ -79,8 +76,9 @@ export function testSortB() {
   })
 }
 
-function testRandomPrice() {
-  setInterval(() => {
-    console.log('order', generateOrder())
-  }, 3000)
+export function generateOrder() {
+  return ({
+    quantity: Math.floor(Math.random()*100) + 1,
+    price: Math.floor(Math.random()*100) + 1
+  })
 }
