@@ -78,9 +78,7 @@ export default class Match {
       // console.log('this.orderbook.sellB', first)
       return this.orderbook.sellB.last()
     }).then((position) => {
-
-      console.log('corresponding position', position)
-      return
+      return this.calculateSettlements()
     })
   }
 
@@ -104,7 +102,20 @@ export default class Match {
       return this.orderbook.sellA.last()
     }).then((position) => {
       console.log('corresponding order', position)
+    })
+  }
 
+  calculateSettlements(orderA, orderB) {
+    if (1/orderB.price < orderA.price) {
+      return
+    }
+    return new Promise((resolve, reject) => {
+      return Promise.delay(0)
+      .then(() => {
+        
+      }).then(() => {
+
+      })
     })
   }
 }
