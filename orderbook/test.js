@@ -5,7 +5,7 @@ import Orderbook from './index'
 let orderbook
 
 let batch_a_amount = 10
-let batch_b_amount = 4
+let batch_b_amount = 10
 
 export function testSortA() {
   return new Promise((resolve, reject) => {

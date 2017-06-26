@@ -30,16 +30,18 @@ export default class Orderbook {
   submitSellB(order) {
     console.log('### submitting sellB order', order)
     let index
+    let found = false
     this.sellB.forEach((entry, i) => {
-      if (entry.price < order.price) {
-        console.log('entry.price', entry.price, order.price, i)
+      if (entry.price < order.price && found == false) {
         index = i
+        found = true
       }
     })
     console.log('index', index)
     if (index == 0) {
+      console.log('unshifting')
       this.sellB = this.sellB.unshift(order)
-    } elseif (index) {
+    } else if (index) {
       console.log('splicing', index)
       this.sellB = this.sellB.splice(index, 0, order)
     } else {
