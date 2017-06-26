@@ -8,21 +8,19 @@ let batch_a_amount = 10
 let batch_b_amount = 10
 
 export function testSortA() {
-  return new Promise((resolve, reject) => {
-    return Promise.delay(500)
-    .then(() => {
-      return orderbook.submitSellA(generateOrder())
-    }).then(() => {
-      batch_a_amount = batch_a_amount - 1
-      if (batch_a_amount <= 0) {
-        console.log('ending')
-        resolve(true)
-      } else {
-        return testSortA()
-      }
-    }).catch((err) => {
-      reject(err)
-    })
+  return Promise.delay(500)
+  .then(() => {
+    return orderbook.submitSellA(generateOrder())
+  }).then(() => {
+    batch_a_amount = batch_a_amount - 1
+    if (batch_a_amount <= 0) {
+      console.log('ending')
+      return true
+    } else {
+      return testSortA()
+    }
+  }).catch((err) => {
+    console.log('err', err)
   })
 }
 
@@ -66,7 +64,9 @@ export function tests() {
     // }).then(() => {
       return testSortA()
     }).then(() => {
-      console.log('sellA book', orderbook.sellA)
+      orderbook.sellA.forEach((element) => {
+        console.log('element', element)
+      })
       return testSortB()
     }).then(() => {
       orderbook.sellB.forEach((element) => {
