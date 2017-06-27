@@ -105,7 +105,7 @@ export default class Match {
     })
   }
 
-  calculateSettlements(order1, order2) {
+  calculateSettlements(order1, order2, book) {
     if (1/order1.price < order2.price) {
       return
     }
@@ -114,13 +114,20 @@ export default class Match {
       return Promise.delay(0)
       .then(() => {
         if (order1.quantity < order2.quantity * order2.price) {
-          this.orderbook.sellA.pop()
-          this.
+          if (book == 'A') {
+            this.orderbook.sellA.pop()
+          } else {
+            this.orderbook.sellB.pop()
+          }
           settlements.push({ from: 'seller1', to: 'seller2', quantity: order1.quantity, token: '0x'})
           settlements.push({ from: 'seller2', to: 'seller1', quantity: order1.price * order1.quantity })
           settlements.push({ from: 'seller2', to: 'Exchange', quantity: (order1.quantity/order2.price) - (order1.price * order1.quantity) })
         } else {
-          this.orderbook.sellB.pop()
+          if (book == 'A') {
+            this.orderbook.sellB.pop()
+          } else {
+            this.orderbook.sellA.pop()
+          }
           settlements.push({ from: 'seller2', to: 'seller1', quantity: order2.quantity, token: '0x' })
           settlements.push({ from: 'seller1', to: 'seller2', quantity: order2.price * order2.quantity })
           settlements.push({ from: 'seller1', to: 'exchange_operator', quantity: (order2.quantity/order1.price) - (order2.price * order2.quantity) })
