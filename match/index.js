@@ -114,16 +114,21 @@ export default class Match {
       return Promise.delay(0)
       .then(() => {
         if (order1.quantity < order2.quantity * order2.price) {
-          settlements.push({ from: '0x', to: '0x', quantity: order1.quantity, token: '0x'})
-          settlements.push({ from: '0x', to: '0x', quantity: order1.price * order1.quantity })
-          settlements.push({ from: '0x', to: '0x', quantity: (order2.quantity/order1.price) - (order2.price * order2.quantity) })
+          this.orderbook.sellA.pop()
+          this.
+          settlements.push({ from: 'seller1', to: 'seller2', quantity: order1.quantity, token: '0x'})
+          settlements.push({ from: 'seller2', to: 'seller1', quantity: order1.price * order1.quantity })
+          settlements.push({ from: 'seller2', to: 'Exchange', quantity: (order1.quantity/order2.price) - (order1.price * order1.quantity) })
         } else {
+          this.orderbook.sellB.pop()
           settlements.push({ from: 'seller2', to: 'seller1', quantity: order2.quantity, token: '0x' })
           settlements.push({ from: 'seller1', to: 'seller2', quantity: order2.price * order2.quantity })
-          settlements.push({ from: '0x', to: 'exchange_operator', quantity: (order1.quantity/order2.price) - (order1.price * order1.quantity) })
+          settlements.push({ from: 'seller1', to: 'exchange_operator', quantity: (order2.quantity/order1.price) - (order2.price * order2.quantity) })
         }
       }).then(() => {
-
+        resolve(settlements)
+      }).catch((err) => {
+        reject(err)
       })
     })
   }
