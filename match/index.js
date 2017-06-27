@@ -133,8 +133,16 @@ export default class Match {
         } else {
           if (book == 'A') {
             this.orderbook.sellB.pop()
+            this.orderbook.sellA.update(-1, order => {
+              ...order,
+              quantity: order.quantity - order2.price * order2.quantity
+            })
           } else {
             this.orderbook.sellA.pop()
+            this.orderbook.sellB.update(-1, order => {
+              ...order,
+              quantity: order.quantity - order2.price * order2.quantity
+            })
           }
           settlements.push({ from: 'seller2', to: 'seller1', quantity: order2.quantity, token: '0x' })
           settlements.push({ from: 'seller1', to: 'seller2', quantity: order2.price * order2.quantity })
