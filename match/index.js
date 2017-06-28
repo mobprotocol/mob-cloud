@@ -150,9 +150,9 @@ export default class Match {
           //   //   quantity: order.quantity - order1.price * order1.quantity
           //   // })
           // }
-          settlements.push({ from: 'seller1', to: 'seller2', quantity: order1.quantity, token: this.orderbook.tokenA})
-          settlements.push({ from: 'seller2', to: 'seller1', quantity: order1.price * order1.quantity })
-          settlements.push({ from: 'seller2', to: 'Exchange', quantity: (order1.quantity/order2.price) - (order1.price * order1.quantity) })
+          settlements.push({ from: 'seller1', to: 'seller2', quantity: order1.quantity, token: order1.token})
+          settlements.push({ from: 'seller2', to: 'seller1', quantity: order1.price * order1.quantity, token: order2.token })
+          settlements.push({ from: 'seller2', to: 'Exchange', quantity: (order1.quantity/order2.price) - (order1.price * order1.quantity), token: order2.token })
         } else {
           // if (book == 'A') {
           //   this.orderbook.sellB.pop()
@@ -167,9 +167,9 @@ export default class Match {
           //   //   quantity: order.quantity - order2.price * order2.quantity
           //   // })
           // }
-          settlements.push({ from: 'seller2', to: 'seller1', quantity: order2.quantity, token: '0x' })
-          settlements.push({ from: 'seller1', to: 'seller2', quantity: order2.price * order2.quantity })
-          settlements.push({ from: 'seller1', to: 'exchange_operator', quantity: (order2.quantity/order1.price) - (order2.price * order2.quantity) })
+          settlements.push({ from: 'seller2', to: 'seller1', quantity: order2.quantity, token: order2.token })
+          settlements.push({ from: 'seller1', to: 'seller2', quantity: order2.price * order2.quantity, token: order1.token })
+          settlements.push({ from: 'seller1', to: 'exchange_operator', quantity: (order2.quantity/order1.price) - (order2.price * order2.quantity), token: order1.token })
         }
       }).then(() => {
         resolve(settlements)
