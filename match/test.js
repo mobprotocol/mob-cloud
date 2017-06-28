@@ -9,19 +9,44 @@ let matchAgent
 let batch_a_amount = 10
 let batch_b_amount = 10
 
+// Promise.delay(0)
+// .then(() => {
+//   return orderbook = new Orderbook()
+// }).then(() => {
+//   return fillOrderbook()
+// }).then(() => {
+//   return matchAgent = new Match({
+//     orderbook: orderbook
+//   })
+// }).then(() => {
+//   console.log('ending test cases')
+// }).catch((err) => {
+//   console.log('err', err)
+// })
+
+const sellA = {
+  user: '0xd492884386ef2847cff0ac97cb820c641fad956d',
+  quantity: 1,
+  price: 220
+}
+
+const sellB = {
+  user: '0xd5addcfc1d9f0b48defa15e24cddaa13565f088f',
+  quantity: 400,
+  price: .004
+}
+
 Promise.delay(0)
 .then(() => {
   return orderbook = new Orderbook()
 }).then(() => {
-  return fillOrderbook()
+  return orderbook.submitSellA(sellA)
 }).then(() => {
-  return matchAgent = new Match({
-    orderbook: orderbook
-  })
+  return orderbook.submitSellB(sellB)
 }).then(() => {
-  console.log('ending test cases')
-}).catch((err) => {
-  console.log('err', err)
+  return matchAgent = new Match()
+}).then(() => {
+
 })
 
 export function fillOrderbook() {
