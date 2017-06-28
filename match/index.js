@@ -84,6 +84,9 @@ export default class Match {
       return this.calculateSettlements(orderA, orderB, 'A')
     }).then((settlements) => {
       console.log('settlements', settlements)
+      return settlements
+    }).map((settlement) => {
+      return this.executeSettlement(settlement)
     }).then(() => {
       Promise.resolve(true)
     }).catch((err) => {
@@ -115,6 +118,9 @@ export default class Match {
       return this.calculateSettlements(orderB, orderA, 'B')
     }).then((settlements) => {
       console.log('settlements', settlements)
+    }).map((settlement) => {
+      return executeSettlement(settlement)
+    }).then(() => {
       Promise.resolve(true)
     }).catch((err) => {
       Promise.reject(err)
@@ -169,6 +175,17 @@ export default class Match {
         resolve(settlements)
       }).catch((err) => {
         reject(err)
+      })
+    })
+  }
+
+  dispatchSettlement(settlement) {
+    return new Promise((resolve, reject) => {
+      return Promise.delay(0)
+      .then(() => {
+
+      }).then(() => {
+        this.settlement.shift(settlement)
       })
     })
   }
