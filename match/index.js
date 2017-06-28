@@ -127,7 +127,7 @@ export default class Match {
     })
   }
 
-  calculateSettlements(order1, order2, book) {
+  calculateSettlements(order1, order2) {
     if (1/order1.price < order2.price) {
       return
     }
@@ -150,7 +150,7 @@ export default class Match {
           //   //   quantity: order.quantity - order1.price * order1.quantity
           //   // })
           // }
-          settlements.push({ from: 'seller1', to: 'seller2', quantity: order1.quantity, token: '0x'})
+          settlements.push({ from: 'seller1', to: 'seller2', quantity: order1.quantity, token: this.orderbook.tokenA})
           settlements.push({ from: 'seller2', to: 'seller1', quantity: order1.price * order1.quantity })
           settlements.push({ from: 'seller2', to: 'Exchange', quantity: (order1.quantity/order2.price) - (order1.price * order1.quantity) })
         } else {

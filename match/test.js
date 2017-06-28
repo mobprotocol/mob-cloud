@@ -27,13 +27,15 @@ let batch_b_amount = 10
 const sellA = {
   user: '0xd492884386ef2847cff0ac97cb820c641fad956d',
   quantity: 1,
-  price: 220
+  price: 220,
+  token: '0x6846e948d8b1ec25bb99dedf821b0d658e226595'
 }
 
 const sellB = {
   user: '0xd5addcfc1d9f0b48defa15e24cddaa13565f088f',
   quantity: 400,
-  price: .004
+  price: .004,
+  token: '0x2da664251cdff1ef96471d5570d6b7d3687b4516'
 }
 
 Promise.delay(0)
