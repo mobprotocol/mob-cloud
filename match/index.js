@@ -85,7 +85,9 @@ export default class Match {
     }).then(() => {
 
     }).then(() => {
-      resolve(true)
+      Promise.resolve(true)
+    }).catch((err) => {
+      Promise.reject(err)
     })
   }
 
