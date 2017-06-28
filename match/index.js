@@ -81,12 +81,12 @@ export default class Match {
       return this.orderbook.sellB.last()
     }).then((orderB) => {
       console.log('order', orderA, orderB)
-      return this.calculateSettlements(orderA, orderB, 'A')
+      return this.calculateSettlements(orderA, orderB)
     }).then((settlements) => {
       console.log('settlements', settlements)
       return settlements
     }).map((settlement) => {
-      return this.executeSettlement(settlement)
+      return this.dispatchSettlement(settlement)
     }).then(() => {
       Promise.resolve(true)
     }).catch((err) => {
@@ -115,11 +115,12 @@ export default class Match {
     .then(() => {
       return this.orderbook.sellA.last()
     }).then((orderA) => {
-      return this.calculateSettlements(orderB, orderA, 'B')
+      return this.calculateSettlements(orderB, orderA)
     }).then((settlements) => {
-      console.log('settlements', settlements)
+      console.log('settlements(order b)', settlements)
+      return settlements
     }).map((settlement) => {
-      return executeSettlement(settlement)
+      return this.dispatchSettlement(settlement)
     }).then(() => {
       Promise.resolve(true)
     }).catch((err) => {
@@ -181,19 +182,23 @@ export default class Match {
 
   dispatchSettlement(settlement) {
     return new Promise((resolve, reject) => {
-      let book
       return Promise.delay(0)
       .then(() => {
         if(settlement.token == this.orderbook.tokenA) {
-          book = 'sellA'
+          return 'sellA'
         } else {
-          book = 'sellB'
+          return 'sellB'
         }
-      }).then(() => {
-        if (settlement.quantity == this.orderbook.sellA.last().quantity) {
-
+      }).then((book) => {
+        console.log('settlement(here)', settlement.quantity)
+        if (settlement.quantity == this.orderbook[book].last().quantity) {
+          this.orderbook[book].pop()
         } else {
-
+          this.orderbook[book].update(-1, order => {
+            console.log('order(here)', order)
+            // ...order,
+            // quantity: order.quantity - order1.price * order1.quantity
+          })
         }
       }).then(() => {
         this.settlement.shift(settlement)
