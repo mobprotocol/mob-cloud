@@ -136,37 +136,37 @@ export default class Match {
       return Promise.delay(0)
       .then(() => {
         if (order1.quantity < order2.quantity * order2.price) {
-          if (book == 'A') {
-            this.orderbook.sellA.pop()
-            console.log('...order1', ...order1)
-            // this.orderbook.sellB.update(-1,  order => {
-            //   ...order,
-            //   quantity: order.quantity - order1.price * order1.quantity
-            // })
-          } else {
-            this.orderbook.sellB.pop()
-            // this.orderbook.sellA.update(-1, order => {
-            //   ...order,
-            //   quantity: order.quantity - order1.price * order1.quantity
-            // })
-          }
+          // if (book == 'A') {
+          //   this.orderbook.sellA.pop()
+          //   console.log('...order1', ...order1)
+          //   // this.orderbook.sellB.update(-1,  order => {
+          //   //   ...order,
+          //   //   quantity: order.quantity - order1.price * order1.quantity
+          //   // })
+          // } else {
+          //   this.orderbook.sellB.pop()
+          //   // this.orderbook.sellA.update(-1, order => {
+          //   //   ...order,
+          //   //   quantity: order.quantity - order1.price * order1.quantity
+          //   // })
+          // }
           settlements.push({ from: 'seller1', to: 'seller2', quantity: order1.quantity, token: '0x'})
           settlements.push({ from: 'seller2', to: 'seller1', quantity: order1.price * order1.quantity })
           settlements.push({ from: 'seller2', to: 'Exchange', quantity: (order1.quantity/order2.price) - (order1.price * order1.quantity) })
         } else {
-          if (book == 'A') {
-            this.orderbook.sellB.pop()
-            // this.orderbook.sellA.update(-1, order => {
-            //   ...order,
-            //   quantity: order.quantity - order2.price * order2.quantity
-            // })
-          } else {
-            this.orderbook.sellA.pop()
-            // this.orderbook.sellB.update(-1, order => {
-            //   ...order,
-            //   quantity: order.quantity - order2.price * order2.quantity
-            // })
-          }
+          // if (book == 'A') {
+          //   this.orderbook.sellB.pop()
+          //   // this.orderbook.sellA.update(-1, order => {
+          //   //   ...order,
+          //   //   quantity: order.quantity - order2.price * order2.quantity
+          //   // })
+          // } else {
+          //   this.orderbook.sellA.pop()
+          //   // this.orderbook.sellB.update(-1, order => {
+          //   //   ...order,
+          //   //   quantity: order.quantity - order2.price * order2.quantity
+          //   // })
+          // }
           settlements.push({ from: 'seller2', to: 'seller1', quantity: order2.quantity, token: '0x' })
           settlements.push({ from: 'seller1', to: 'seller2', quantity: order2.price * order2.quantity })
           settlements.push({ from: 'seller1', to: 'exchange_operator', quantity: (order2.quantity/order1.price) - (order2.price * order2.quantity) })
@@ -181,9 +181,20 @@ export default class Match {
 
   dispatchSettlement(settlement) {
     return new Promise((resolve, reject) => {
+      let book
       return Promise.delay(0)
       .then(() => {
+        if(settlement.token == this.orderbook.tokenA) {
+          book = 'sellA'
+        } else {
+          book = 'sellB'
+        }
+      }).then(() => {
+        if (settlement.quantity == this.orderbook.sellA.last().quantity) {
 
+        } else {
+
+        }
       }).then(() => {
         this.settlement.shift(settlement)
       })
