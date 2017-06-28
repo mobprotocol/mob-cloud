@@ -82,8 +82,8 @@ export default class Match {
     }).then((orderB) => {
       console.log('order', orderA, orderB)
       return this.calculateSettlements(orderA, orderB, 'A')
-    }).then(() => {
-
+    }).then((settlements) => {
+      console.log('settlements', settlements)
     }).then(() => {
       Promise.resolve(true)
     }).catch((err) => {
@@ -113,7 +113,8 @@ export default class Match {
       return this.orderbook.sellA.last()
     }).then((orderA) => {
       return this.calculateSettlements(orderB, orderA, 'B')
-    }).then(() => {
+    }).then((settlements) => {
+      console.log('settlements', settlements)
       Promise.resolve(true)
     }).catch((err) => {
       Promise.reject(err)
