@@ -44,7 +44,7 @@ Promise.delay(0)
 }).then(() => {
   return orderbook.submitSellB(sellB)
 }).then(() => {
-  return matchAgent = new Match()
+  return matchAgent = new Match({ orderbook: orderbook })
 }).then(() => {
 
 })

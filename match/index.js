@@ -62,7 +62,7 @@ export default class Match {
       return Promise.delay(0)
       .then(() => {
         console.log('### processing order A')
-        return this.getOrderSetB()
+        return this.getOrderSetB(order)
       }).then(() => {
         resolve(true)
       }).catch((err) => {
@@ -78,7 +78,12 @@ export default class Match {
       // console.log('this.orderbook.sellB', first)
       return this.orderbook.sellB.last()
     }).then((position) => {
-      return this.calculateSettlements()
+      console.log('order', order, position)
+      return this.calculateSettlements(order, position)
+    }).then(() => {
+
+    }).then(() => {
+      resolve(true)
     })
   }
 
@@ -116,16 +121,17 @@ export default class Match {
         if (order1.quantity < order2.quantity * order2.price) {
           if (book == 'A') {
             this.orderbook.sellA.pop()
-            this.orderbook.sellB.update(-1,  order => {
-              ...order,
-              quantity: order.quantity - order1.price * order1.quantity
-            })
+            console.log('...order1', ...order1)
+            // this.orderbook.sellB.update(-1,  order => {
+            //   ...order,
+            //   quantity: order.quantity - order1.price * order1.quantity
+            // })
           } else {
             this.orderbook.sellB.pop()
-            this.orderbook.sellA.update(-1, order => {
-              ...order,
-              quantity: order.quantity - order1.price * order1.quantity
-            })
+            // this.orderbook.sellA.update(-1, order => {
+            //   ...order,
+            //   quantity: order.quantity - order1.price * order1.quantity
+            // })
           }
           settlements.push({ from: 'seller1', to: 'seller2', quantity: order1.quantity, token: '0x'})
           settlements.push({ from: 'seller2', to: 'seller1', quantity: order1.price * order1.quantity })
@@ -133,16 +139,16 @@ export default class Match {
         } else {
           if (book == 'A') {
             this.orderbook.sellB.pop()
-            this.orderbook.sellA.update(-1, order => {
-              ...order,
-              quantity: order.quantity - order2.price * order2.quantity
-            })
+            // this.orderbook.sellA.update(-1, order => {
+            //   ...order,
+            //   quantity: order.quantity - order2.price * order2.quantity
+            // })
           } else {
             this.orderbook.sellA.pop()
-            this.orderbook.sellB.update(-1, order => {
-              ...order,
-              quantity: order.quantity - order2.price * order2.quantity
-            })
+            // this.orderbook.sellB.update(-1, order => {
+            //   ...order,
+            //   quantity: order.quantity - order2.price * order2.quantity
+            // })
           }
           settlements.push({ from: 'seller2', to: 'seller1', quantity: order2.quantity, token: '0x' })
           settlements.push({ from: 'seller1', to: 'seller2', quantity: order2.price * order2.quantity })
