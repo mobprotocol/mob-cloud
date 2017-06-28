@@ -57,12 +57,14 @@ export default class Match {
     })
   }
 
-  processOrderA(order) {
+  processOrderA() {
     return new Promise((resolve, reject) => {
       return Promise.delay(0)
       .then(() => {
+        return this.orderbook.sellA.last()
+      }).then((orderA) => {
         console.log('### processing order A')
-        return this.getOrderSetB(order)
+        return this.getOrderSetB(orderA)
       }).then(() => {
         resolve(true)
       }).catch((err) => {
@@ -71,15 +73,15 @@ export default class Match {
     })
   }
 
-  getOrderSetB(order) {
+  getOrderSetB(orderA) {
     return Promise.delay(0)
     .then(() => {
       // const first = this.orderbook.sellB.last()
       // console.log('this.orderbook.sellB', first)
       return this.orderbook.sellB.last()
-    }).then((position) => {
-      console.log('order', order, position)
-      return this.calculateSettlements(order, position)
+    }).then((orderB) => {
+      console.log('order', orderA, orderB)
+      return this.calculateSettlements(orderA, orderB, 'A')
     }).then(() => {
 
     }).then(() => {
