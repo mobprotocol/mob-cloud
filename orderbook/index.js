@@ -7,6 +7,8 @@ export default class Orderbook {
   constructor(params) {
     console.log('### made it to Orderbook constructor')
     this.hello = 'world'
+    this.tokenA = params.tokenA
+    this.tokenB = params.tokenB
     this.sellA =  new List()
     this.sellB = new List()
     // this.db = params.db.sublevel(`orderbook_${params.tokenA}_params${params.tokenB}`)
@@ -16,7 +18,7 @@ export default class Orderbook {
     console.log('### submitting sellA order', order)
     let index
     let found = false
-    this.sellA.forEach((entry, i) => {
+    this.sellB.forEach((entry, i) => {
       if (entry.price < order.price && found == false) {
         index = i
         found = true
