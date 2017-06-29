@@ -1,8 +1,6 @@
 import express from 'express'
 import Promise from 'bluebird'
 import Server from 'simple-websocket/server'
-import levelup from 'levelup'
-import sublevel from 'level-sublevel'
 
 /**
   RESTFUL API
@@ -37,13 +35,3 @@ socket.on('connection', (socket) => {
 export function sendData(data) {
   socket.write(data)
 }
-
-/**
-  STATECHANNEL
-*/
-export const db = sublevel(levelup('./leveldb'))
-
-
-/**
-  PERMUTATIONS
-*/
