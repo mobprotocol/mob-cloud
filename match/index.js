@@ -190,18 +190,19 @@ export default class Match {
           return 'sellB'
         }
       }).then((book) => {
-        console.log('settlement(here)', settlement.quantity)
         if (settlement.quantity == this.orderbook[book].last().quantity) {
           this.orderbook[book].pop()
         } else {
           this.orderbook[book].update(-1, order => {
             console.log('order(here)', order)
-            // ...order,
-            // quantity: order.quantity - order1.price * order1.quantity
+            user: order.user,
+            quantity: order.quantity - settlement.quantity,
+            price: order.price,
+            token: order.token
           })
         }
       }).then(() => {
-        this.settlement.shift(settlement)
+        // this.settlement.shift(settlement)
       })
     })
   }
