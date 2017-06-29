@@ -12,7 +12,7 @@ export default class Settlement {
 
   daemon() {
     return new Promise((resolve, reject) => {
-      return Promise.delay(0)
+      return Promise.delay(1000)
       .then(() => {
         return this.queue.last()
       }).then((orders) => {
@@ -23,7 +23,7 @@ export default class Settlement {
     })
   }
 
-  executeTrades(orders) {
-
+  executeTrades(order) {
+    console.log('### sending order to the EVM', order)
   }
 }
