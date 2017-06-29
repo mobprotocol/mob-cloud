@@ -193,12 +193,15 @@ export default class Match {
         if (settlement.quantity == this.orderbook[book].last().quantity) {
           this.orderbook[book].pop()
         } else {
+
           this.orderbook[book].update(-1, order => {
-            console.log('order(here)', order)
-            user: order.user,
-            quantity: order.quantity - settlement.quantity,
-            price: order.price,
-            token: order.token
+            // console.log('order(here)', order)
+            return {
+              user: order.user,
+              quantity: order.quantity - settlement.quantity,
+              price: order.price,
+              token: order.token
+            }
           })
         }
       }).then(() => {
