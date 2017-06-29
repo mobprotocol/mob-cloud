@@ -25,8 +25,8 @@ export const contracts = [
     supply: 1000000000
   },
   {
-    name: 'Ethereum',
-    ticker: 'ETH',
+    name: 'Digix',
+    ticker: 'DGX',
     supply: 1000000000
   },
   {
@@ -44,6 +44,11 @@ export const contracts = [
     ticker: 'MLN',
     supply: 1000000000
   },
+  {
+    name: 'Dollar',
+    ticker: 'USD',
+    supply: 1000000000
+  }
 ]
 
 export const pair = [
