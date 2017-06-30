@@ -239,15 +239,23 @@ export default class Match {
         return this.orderbook[book2].last()
       }).then((order2) => {
         if (1/order1.price > order2.price) {
-          return
+          return settle(order1, order2)
         } else {
           resolve(true)
         }
+      }).then((settlements) => {
+        return
+      }).catch((err) => {
+        return Promise.delay(1000)
+        .then(() => {
+          console.log('### error in settlement loop', err)
+          return orderSettlements(order1, settlements, book1, book2)
+        })
       })
     })
   }
 
-  settle() {
+  calculateSettlement(order1, order) {
 
   }
 }
