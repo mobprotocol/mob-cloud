@@ -221,7 +221,7 @@ export default class Match {
         return this.orderbook[book1].last()
       }).then((order) => {
         console.log('order', order)
-      //   return orderSettlements()
+        return orderSettlements(order, [], book1, book2)
       // }).then((settlements) => {
       //   return submitSettlements()
       // }).then(() => {
@@ -232,9 +232,22 @@ export default class Match {
     })
   }
 
-  orderSettlements() {
-    retur
+  orderSettlements(order1, settlements, book1, book2) {
+    return new Promise((resolve, reject) => {
+      return Promise.delay(0)
+      .then(() => {
+        return this.orderbook[book2].last()
+      }).then((order2) => {
+        if (1/order1.price > order2.price) {
+          return
+        } else {
+          resolve(true)
+        }
+      })
+    })
   }
 
+  settle() {
 
+  }
 }
