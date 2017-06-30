@@ -28,14 +28,12 @@ export default class Match {
       }).then((side) => {
         switch(side) {
           case 0:
-            return this.processOrderA()
+            return this.processOrder('sellA', 'sellB')
           case 1:
-            return this.processOrderB()
+            return this.processOrder('sellB', 'sellA')
           default:
-            return this.ProcessOrderA()
+            return this.processOrder('sellA', 'sellB')
         }
-      }).then((order) => {
-
       }).then(() => {
         resolve(true)
       })
@@ -193,7 +191,6 @@ export default class Match {
         if (settlement.quantity == this.orderbook[book].last().quantity) {
           this.orderbook[book].pop()
         } else {
-
           this.orderbook[book] = this.orderbook[book].update(-1, order => {
             // console.log('order(here)', order)
             return {
@@ -207,10 +204,37 @@ export default class Match {
         return book
       }).then((book) => {
         console.log('this.orderbook.get(-1)', this.orderbook[book].last())
-        // this.settlement.shift(settlement)
+        return this.settlements.queue.unshift(settlement)
+      }).then(() => {
+        resolve(true)
       }).catch((err) => {
         reject(err)
       })
     })
   }
+
+
+  processOrder(book1, book2) {
+    return new Promise((resolve, reject) => {
+      return Promise.delay(0)
+      .then(() => {
+        return this.orderbook[book1].last()
+      }).then((order) => {
+        console.log('order', order)
+      //   return orderSettlements()
+      // }).then((settlements) => {
+      //   return submitSettlements()
+      // }).then(() => {
+        resolve(true)
+      }).catch((err) => {
+        reject(err)
+      })
+    })
+  }
+
+  orderSettlements() {
+    retur
+  }
+
+
 }
