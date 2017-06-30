@@ -126,28 +126,6 @@ export default class Match {
     })
   }
 
-  calculateSettlements(order1, order2) {
-    const settlements = []
-    return new Promise((resolve, reject) => {
-      return Promise.delay(0)
-      .then(() => {
-        if (order1.quantity < order2.quantity * order2.price) {
-          settlements.push({ from: 'seller1', to: 'seller2', quantity: order1.quantity, token: order1.token})
-          settlements.push({ from: 'seller2', to: 'seller1', quantity: order1.price * order1.quantity, token: order2.token })
-          settlements.push({ from: 'seller2', to: 'Exchange', quantity: (order1.quantity/order2.price) - (order1.price * order1.quantity), token: order2.token })
-        } else {
-          settlements.push({ from: 'seller2', to: 'seller1', quantity: order2.quantity, token: order2.token })
-          settlements.push({ from: 'seller1', to: 'seller2', quantity: order2.price * order2.quantity, token: order1.token })
-          settlements.push({ from: 'seller1', to: 'exchange_operator', quantity: (order2.quantity/order1.price) - (order2.price * order2.quantity), token: order1.token })
-        }
-      }).then(() => {
-        resolve(settlements)
-      }).catch((err) => {
-        reject(err)
-      })
-    })
-  }
-
   dispatchSettlement(settlement) {
     return new Promise((resolve, reject) => {
       return Promise.delay(0)
@@ -191,7 +169,7 @@ export default class Match {
         return this.orderbook[book1].last()
       }).then((order) => {
         console.log('order', order)
-        return orderSettlements(order, [], book1, book2)
+        return orderSettlements(order, book1, book2)
       // }).then((settlements) => {
       //   return submitSettlements()
       // }).then(() => {
@@ -202,7 +180,7 @@ export default class Match {
     })
   }
 
-  orderSettlements(order1, settlements, book1, book2) {
+  orderSettlements(order1, book1, book2) {
     return new Promise((resolve, reject) => {
       return Promise.delay(0)
       .then(() => {
@@ -214,7 +192,17 @@ export default class Match {
           resolve(true)
         }
       }).then((settlements) => {
-        return dispatchSettlements()
+        return dispatchSettlements(settlements)
+      }).then((updates) => {
+        return updateOrderBook(updates)
+      }).then(() => {
+        return this.orderbook[book1].last()
+      }).then((newOrder) => {
+        if (newOrder.quantity <= 0) {
+          resolve(true)
+        } else {
+          return orderSettlements(newOrder, book1, book2)
+        }
       }).catch((err) => {
         return Promise.delay(1000)
         .then(() => {
@@ -225,5 +213,26 @@ export default class Match {
     })
   }
 
+  calculateSettlements(order1, order2) {
+    const settlements = []
+    return new Promise((resolve, reject) => {
+      return Promise.delay(0)
+      .then(() => {
+        if (order1.quantity < order2.quantity * order2.price) {
+          settlements.push({ from: 'seller1', to: 'seller2', quantity: order1.quantity, token: order1.token})
+          settlements.push({ from: 'seller2', to: 'seller1', quantity: order1.price * order1.quantity, token: order2.token })
+          settlements.push({ from: 'seller2', to: 'Exchange', quantity: (order1.quantity/order2.price) - (order1.price * order1.quantity), token: order2.token })
+        } else {
+          settlements.push({ from: 'seller2', to: 'seller1', quantity: order2.quantity, token: order2.token })
+          settlements.push({ from: 'seller1', to: 'seller2', quantity: order2.price * order2.quantity, token: order1.token })
+          settlements.push({ from: 'seller1', to: 'exchange_operator', quantity: (order2.quantity/order1.price) - (order2.price * order2.quantity), token: order1.token })
+        }
+      }).then(() => {
+        resolve(settlements)
+      }).catch((err) => {
+        reject(err)
+      })
+    })
+  }
 
 }
