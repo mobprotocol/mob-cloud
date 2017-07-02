@@ -126,42 +126,6 @@ export default class Match {
     })
   }
 
-  dispatchSettlement(settlement) {
-    return new Promise((resolve, reject) => {
-      return Promise.delay(0)
-      .then(() => {
-        if(settlement.token == this.orderbook.tokenA) {
-          return 'sellA'
-        } else {
-          return 'sellB'
-        }
-      }).then((book) => {
-        if (settlement.quantity == this.orderbook[book].last().quantity) {
-          this.orderbook[book].pop()
-        } else {
-          this.orderbook[book] = this.orderbook[book].update(-1, order => {
-            // console.log('order(here)', order)
-            return {
-              user: 'testing update',
-              quantity: order.quantity - settlement.quantity,
-              price: order.price,
-              token: order.token
-            }
-          })
-        }
-        return book
-      }).then((book) => {
-        console.log('this.orderbook.get(-1)', this.orderbook[book].last())
-        return this.settlements.queue.unshift(settlement)
-      }).then(() => {
-        resolve(true)
-      }).catch((err) => {
-        reject(err)
-      })
-    })
-  }
-
-
   processOrder(book1, book2) {
     return new Promise((resolve, reject) => {
       return Promise.delay(0)
@@ -229,6 +193,41 @@ export default class Match {
         }
       }).then(() => {
         resolve(settlements)
+      }).catch((err) => {
+        reject(err)
+      })
+    })
+  }
+
+  dispatchSettlement(settlement) {
+    return new Promise((resolve, reject) => {
+      return Promise.delay(0)
+      .then(() => {
+        if(settlement.token == this.orderbook.tokenA) {
+          return 'sellA'
+        } else {
+          return 'sellB'
+        }
+      }).then((book) => {
+        if (settlement.quantity == this.orderbook[book].last().quantity) {
+          this.orderbook[book].pop()
+        } else {
+          this.orderbook[book] = this.orderbook[book].update(-1, order => {
+            // console.log('order(here)', order)
+            return {
+              user: 'testing update',
+              quantity: order.quantity - settlement.quantity,
+              price: order.price,
+              token: order.token
+            }
+          })
+        }
+        return book
+      }).then((book) => {
+        console.log('this.orderbook.get(-1)', this.orderbook[book].last())
+        return this.settlement.queue.unshift(settlement)
+      }).then(() => {
+        resolve(true)
       }).catch((err) => {
         reject(err)
       })
