@@ -1,6 +1,6 @@
 import Promise from 'bluebird'
 
-import Settlement from './Settlement'
+import Settlement from './index'
 
 let settlement
 
@@ -15,3 +15,23 @@ Promise.delay(0)
 }).catch((err) => {
   Promise.reject(err)
 })
+
+
+export function submitSettlements() {
+  return new Promise((resolve, reject) => {
+    return Promise.delay(0)
+    .then(() => {
+      return generateSettlement()
+    }).then((_settlement) => {
+      return this.settlement.queue = this.settlement.queue.unshift(_settlment)
+    }).then(() => {
+      console.log('this.settlement.queue', this.settlement.queue)
+    }).catch((err) => {
+      reject(err)
+    })
+  })
+}
+
+export function generateSettlement() {
+
+}

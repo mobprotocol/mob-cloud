@@ -5,8 +5,8 @@ import { List } from 'immutable'
 
 export default class Settlement {
   constructor(params) {
-    this.db = params.db.sublevel(`settlement_${params.tokenA}_${params.tokenB}`)
-    this.trie = new Trie(this.db)
+    // this.db = params.db.sublevel(`settlement_${params.tokenA}_${params.tokenB}`)
+    // this.trie = new Trie(this.db)
     this.queue = new List()
   }
 
