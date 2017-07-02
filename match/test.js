@@ -2,9 +2,11 @@ import Promise from 'bluebird'
 
 import Match from './index'
 import Orderbook from '../orderbook/index'
+import Settlement from '../settlement/index'
 
 let orderbook
 let matchAgent
+let settlement
 
 let batch_a_amount = 10
 let batch_b_amount = 10
@@ -49,7 +51,12 @@ Promise.delay(0)
 }).then(() => {
   return orderbook.submitSellB(sellB)
 }).then(() => {
-  return matchAgent = new Match({ orderbook: orderbook })
+  return settlement = new Settlement({
+    tokenA: '0x6846e948d8b1ec25bb99dedf821b0d658e226595',
+    tokenB: '0x2da664251cdff1ef96471d5570d6b7d3687b4516'
+  })
+}).then(() => {
+  return matchAgent = new Match({ settlement: settlement, orderbook: orderbook })
 }).then(() => {
 
 })

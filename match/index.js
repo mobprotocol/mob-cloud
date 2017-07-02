@@ -74,8 +74,6 @@ export default class Match {
   getOrderSetB(orderA) {
     return Promise.delay(0)
     .then(() => {
-      // const first = this.orderbook.sellB.last()
-      // console.log('this.orderbook.sellB', first)
       return this.orderbook.sellB.last()
     }).then((orderB) => {
       console.log('order', orderA, orderB)
@@ -134,9 +132,6 @@ export default class Match {
       }).then((order) => {
         console.log('order', order)
         return this.orderSettlements(order, book1, book2)
-      // }).then((settlements) => {
-      //   return submitSettlements()
-      // }).then(() => {
         resolve(true)
       }).catch((err) => {
         reject(err)
@@ -157,14 +152,14 @@ export default class Match {
         }
       }).map((settlement) => {
         return this.dispatchSettlement(settlement)
-      }).then((updates) => {
-        return this.updateOrderBook(updates)
       }).then(() => {
         return this.orderbook[book1].last()
       }).then((newOrder) => {
         if (newOrder.quantity <= 0) {
+          console.log('order exaughsted')
           resolve(true)
         } else {
+          console.log('newOrder', newOrder)
           return this.orderSettlements(newOrder, book1, book2)
         }
       }).catch((err) => {
@@ -213,7 +208,6 @@ export default class Match {
           this.orderbook[book].pop()
         } else {
           this.orderbook[book] = this.orderbook[book].update(-1, order => {
-            // console.log('order(here)', order)
             return {
               user: 'testing update',
               quantity: order.quantity - settlement.quantity,
@@ -224,7 +218,6 @@ export default class Match {
         }
         return book
       }).then((book) => {
-        console.log('this.orderbook.get(-1)', this.orderbook[book].last())
         return this.settlement.queue.unshift(settlement)
       }).then(() => {
         resolve(true)
