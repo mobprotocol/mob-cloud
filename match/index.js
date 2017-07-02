@@ -9,7 +9,7 @@ export default class Match {
 
   daemon() {
     return new Promise((resolve, reject) => {
-      return Promise.delay(1000)
+      return Promise.delay(5000)
       .then(() => {
         return this.matchingEvent()
       }).then(() => {
@@ -141,7 +141,7 @@ export default class Match {
 
   orderSettlements(order1, book1, book2) {
     return new Promise((resolve, reject) => {
-      return Promise.delay(0)
+      return Promise.delay(5000)
       .then(() => {
         return this.orderbook[book2].last()
       }).then((order2) => {
@@ -155,7 +155,12 @@ export default class Match {
       }).then(() => {
         return this.orderbook[book1].last()
       }).then((newOrder) => {
-        if (newOrder.quantity <= 0) {
+        console.log('newOrder', newOrder)
+        if(newOrder == null) {
+          console.log('null null')
+          resolve(true)
+        }
+        else if (newOrder.quantity <= 0) {
           console.log('order exaughsted')
           resolve(true)
         } else {
@@ -187,6 +192,7 @@ export default class Match {
           settlements.push({ from: 'seller1', to: 'exchange_operator', quantity: (order2.quantity/order1.price) - (order2.price * order2.quantity), token: order1.token })
         }
       }).then(() => {
+        console.log('settlements', settlements)
         resolve(settlements)
       }).catch((err) => {
         reject(err)
@@ -205,8 +211,10 @@ export default class Match {
         }
       }).then((book) => {
         if (settlement.quantity == this.orderbook[book].last().quantity) {
-          this.orderbook[book].pop()
+          console.log('popping orderbook')
+          this.orderbook[book] = this.orderbook[book].pop()
         } else {
+          console.log('updating orderbook', settlement.quantity)
           this.orderbook[book] = this.orderbook[book].update(-1, order => {
             return {
               user: 'testing update',
