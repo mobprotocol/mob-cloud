@@ -8,6 +8,7 @@ export default class Settlement {
     // this.db = params.db.sublevel(`settlement_${params.tokenA}_${params.tokenB}`)
     // this.trie = new Trie(this.db)
     this.queue = new List()
+    this.daemon()
   }
 
   daemon() {
@@ -16,9 +17,11 @@ export default class Settlement {
       .then(() => {
         return this.queue.last()
       }).then((orders) => {
-        return executeTrades(orders)
+        return executeTranser(order)
       }).then(() => {
         return this.queue = this.queue.pop()
+      }).then(() => {
+        return this.daemon()
       })
     })
   }
