@@ -191,8 +191,8 @@ export default class Match {
         } else {
           resolve(true)
         }
-      }).then((settlements) => {
-        return this.dispatchSettlements(settlements)
+      }).map((settlement) => {
+        return this.dispatchSettlement(settlement)
       }).then((updates) => {
         return this.updateOrderBook(updates)
       }).then(() => {
