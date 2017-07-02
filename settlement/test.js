@@ -11,6 +11,8 @@ Promise.delay(0)
     tokenB: '0x2da664251cdff1ef96471d5570d6b7d3687b4516'
   })
 }).then(() => {
+  return submitSettlements()
+}).then(() => {
   Promise.resolve(true)
 }).catch((err) => {
   Promise.reject(err)
@@ -23,9 +25,9 @@ export function submitSettlements() {
     .then(() => {
       return generateSettlement()
     }).then((_settlement) => {
-      return this.settlement.queue = this.settlement.queue.unshift(_settlment)
+      return settlement.queue = settlement.queue.unshift(_settlement)
     }).then(() => {
-      console.log('this.settlement.queue', this.settlement.queue)
+      console.log('settlement.queue', settlement.queue)
     }).catch((err) => {
       reject(err)
     })
@@ -33,5 +35,10 @@ export function submitSettlements() {
 }
 
 export function generateSettlement() {
-
+  return ({
+    from: '',
+    to: '',
+    token: Math.floor(Math.random()*100) + 1 ,
+    quantity: ''
+  })
 }
