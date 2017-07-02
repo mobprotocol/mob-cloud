@@ -143,8 +143,13 @@ export default class Match {
     return new Promise((resolve, reject) => {
       return Promise.delay(5000)
       .then(() => {
-        return this.orderbook[book2].last()
+        if (this.orderbook[book2].isEmpty()) {
+          resolve(true)
+        } else {
+          return this.orderbook[book2].last()
+        }
       }).then((order2) => {
+
         if (1/order1.price > order2.price) {
           return this.calculateSettlements(order1, order2)
         } else {
@@ -168,11 +173,12 @@ export default class Match {
           return this.orderSettlements(newOrder, book1, book2)
         }
       }).catch((err) => {
-        return Promise.delay(1000)
-        .then(() => {
-          console.log('### error in settlement loop', err)
-          return this.orderSettlements(order1, book1, book2)
-        })
+        // return Promise.delay(1000)
+        // .then(() => {
+        //   console.log('### error in settlement loop', err)
+        //   return this.orderSettlements(order1, book1, book2)
+        // })
+        reject(err)
       })
     })
   }
