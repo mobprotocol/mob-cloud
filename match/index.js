@@ -169,7 +169,7 @@ export default class Match {
         return this.orderbook[book1].last()
       }).then((order) => {
         console.log('order', order)
-        return orderSettlements(order, book1, book2)
+        return this.orderSettlements(order, book1, book2)
       // }).then((settlements) => {
       //   return submitSettlements()
       // }).then(() => {
@@ -187,27 +187,27 @@ export default class Match {
         return this.orderbook[book2].last()
       }).then((order2) => {
         if (1/order1.price > order2.price) {
-          return calculateSettlements(order1, order2)
+          return this.calculateSettlements(order1, order2)
         } else {
           resolve(true)
         }
       }).then((settlements) => {
-        return dispatchSettlements(settlements)
+        return this.dispatchSettlements(settlements)
       }).then((updates) => {
-        return updateOrderBook(updates)
+        return this.updateOrderBook(updates)
       }).then(() => {
         return this.orderbook[book1].last()
       }).then((newOrder) => {
         if (newOrder.quantity <= 0) {
           resolve(true)
         } else {
-          return orderSettlements(newOrder, book1, book2)
+          return this.orderSettlements(newOrder, book1, book2)
         }
       }).catch((err) => {
         return Promise.delay(1000)
         .then(() => {
           console.log('### error in settlement loop', err)
-          return orderSettlements(order1, settlements, book1, book2)
+          return this.orderSettlements(order1, book1, book2)
         })
       })
     })
@@ -234,5 +234,4 @@ export default class Match {
       })
     })
   }
-
 }
