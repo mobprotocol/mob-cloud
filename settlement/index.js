@@ -2,7 +2,7 @@ import Promise from 'bluebird'
 import sublevel from 'level-sublevel'
 import Trie from 'merkle-patricia-tree'
 import { List } from 'immutable'
-import { sha3 } from 'ethereumjs-util'
+import { sha256 } from 'ethereumjs-util'
 
 export default class Settlement {
   constructor(params) {
@@ -33,18 +33,16 @@ export default class Settlement {
   }
 
   insertSettlement(_settlement) {
-    console.log(2)
     return new Promise((resolve, reject) => {
       return Promise.delay(0)
       .then(() => {
         return this.timeStamp()
       }).then((timestamp) => {
-        console.log('timetamp', timestamp)
-        return _settlement.time = timeStamp
+        return _settlement.time = timestamp
       }).then(() => {
-        return action(_settlement)
+        return this.action(_settlement)
       }).then(() => {
-        return insertion(_settlement)
+        return this.insertion(_settlement)
       }).then(() => {
         resolve(true)
       }).catch((err) => {
@@ -58,23 +56,29 @@ export default class Settlement {
   }
 
   action(_settlement) {
-    this.actions_db.put(hash(_settlement), _settlement, () => {
+    this.actions_db.put(this.hash(_settlement), _settlement, (err) => {
       if (err) {
         console.log('### error in action push', err)
       }
     })
   }
 
-  hash(object) {
-    return sha3(object, (err) => {
+  hash(thing) {
+    console.log('thing type', typeof thing)
+    return sha256(JSON.stringify(thing), (err) => {
       if(err) {
         console.log('### error hashing object', err)
       }
     })
+
+    // return sha256('hello world', (err) => {
+    //   if(err) {
+    //     console.log('### error hashing object', err)
+    //   }
+    // })
   }
 
   timeStamp() {
-    console.log(3)
     return new Date().getTime()
   }
 
@@ -84,7 +88,7 @@ export default class Settlement {
       .then(() => {
         return this.queue = this.queue.unshift(_settlement)
       }).then(() => {
-        return snapshot()
+        return this.snapshot()
       }).then(() => {
         resolve(true)
       }).catch((err) => {
@@ -109,7 +113,7 @@ export default class Settlement {
   }
 
   snapshot() {
-    this.queue_db.put(hash(this.queue), this.queue, (err) => {
+    this.queue_db.put(this.hash(JSON.stringify(this.queue.toObject())), JSON.stringify(this.queue.toObject()), (err) => {
       if (err) {
         console.log('### error in snapshot write', err)
       }

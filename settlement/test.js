@@ -27,7 +27,6 @@ export function submitSettlements() {
     .then(() => {
       return generateSettlement()
     }).then((_settlement) => {
-      console.log(1)
       return settlement.insertSettlement(_settlement)
     }).then(() => {
       console.log('settlement.queue', settlement.queue)
