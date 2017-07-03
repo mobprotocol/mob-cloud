@@ -31,12 +31,30 @@ export default class Settlement {
     })
   }
 
-  insertSettlement() {
-
+  insertSettlement(_settlement) {
+    return new Promise((resolve, reject) => {
+      return this.timeStamp()
+    }).then((timestamp) => {
+      return _settlement.time = timeStamp
+    }).then(() => {
+      return action(_settlement)
+    }).then(() => {
+      return mutation(_settlement)
+    }).then(() => {
+      return snapshot()
+    }).then(() => {
+      resolve(true)
+    }).catch((err) => {
+      reject(err)
+    })
   }
 
-  action() {
+  action(_settlement) {
+    
+  }
 
+  timeStamp() {
+    return new Date().getTime()
   }
 
   mutation() {
