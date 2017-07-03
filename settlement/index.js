@@ -17,7 +17,11 @@ export default class Settlement {
       .then(() => {
         return this.queue.last()
       }).then((orders) => {
-        return executeTranser(order)
+        if (orders) {
+          return this.executeTransfer(orders)
+        } else {
+          return this.daemon()
+        }
       }).then(() => {
         return this.queue = this.queue.pop()
       }).then(() => {
@@ -26,7 +30,7 @@ export default class Settlement {
     })
   }
 
-  executeTrades(order) {
+  executeTransfer(order) {
     console.log('### sending order to the EVM', order)
   }
 }
