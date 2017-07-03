@@ -42,8 +42,6 @@ export default class Settlement {
     }).then(() => {
       return mutation(_settlement)
     }).then(() => {
-      return snapshot()
-    }).then(() => {
       resolve(true)
     }).catch((err) => {
       reject(err)
@@ -70,8 +68,15 @@ export default class Settlement {
     return new Date().getTime()
   }
 
-  mutation() {
-
+  mutation(_settlement) {
+    return new Promise((resolve, reject) => {
+      return Promise.delay(0)
+      .then(() => {
+        return this.queue = this.queue.unshift(_settlement)
+      }).then(() => {
+        return snapshot()
+      })
+    })
   }
 
   snapshot() {
