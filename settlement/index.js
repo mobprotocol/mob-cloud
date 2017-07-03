@@ -2,6 +2,7 @@ import Promise from 'bluebird'
 import sublevel from 'level-sublevel'
 import Trie from 'merkle-patricia-tree'
 import { List } from 'immutable'
+import { sha3 } from 'ethereumjs-utl'
 
 export default class Settlement {
   constructor(params) {
@@ -50,7 +51,22 @@ export default class Settlement {
   }
 
   action(_settlement) {
-    
+    try {
+      this.actions_db.
+    }
+    catch (err) {
+      console.log('### error in action push', err)
+    }
+
+    this.actions_db.put('')
+  }
+
+  hash(object) {
+    return sha3(object, (err) => {
+      if(err) {
+        console.log('### error hashing object', err)
+      }
+    })
   }
 
   timeStamp() {
