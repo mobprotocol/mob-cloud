@@ -80,7 +80,11 @@ export default class Settlement {
   }
 
   snapshot() {
-
+    this.queue_db.put(hash(this.queue), this.queue, (err) => {
+      if (err) {
+        console.log('### error in snapshot write', err)
+      }
+    })
   }
 
   executeTransfer(order) {
