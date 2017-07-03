@@ -3,11 +3,10 @@ import sublevel from 'level-sublevel'
 import Trie from 'merkle-patricia-tree'
 import { List } from 'immutable'
 
-import { db } from '../leveldb/index'
-
 export default class Settlement {
   constructor(params) {
-    this.db = params.db.sublevel(`settlement_${params.tokenA}_${params.tokenB}`)
+    this.queue_db = params.db.sublevel(`settlement_queue_${params.tokenA}_${params.tokenB}`)
+    this.actions_db = params.db.sublevel(`settlement_actions_${params.tokenA}_${params.tokenB}`)
     // this.trie = new Trie(this.db)
     this.queue = new List()
     this.daemon()
@@ -32,7 +31,19 @@ export default class Settlement {
     })
   }
 
-  saveToDisk() {
+  insertSettlement() {
+
+  }
+
+  action() {
+
+  }
+
+  mutation() {
+
+  }
+
+  snapshot() {
 
   }
 
