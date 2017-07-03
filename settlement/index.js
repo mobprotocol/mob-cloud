@@ -51,14 +51,11 @@ export default class Settlement {
   }
 
   action(_settlement) {
-    try {
-      this.actions_db.
-    }
-    catch (err) {
-      console.log('### error in action push', err)
-    }
-
-    this.actions_db.put('')
+    this.actions_db.put(hash(_settlement), _settlement, () => {
+      if (err) {
+        console.log('### error in action push', err)
+      }
+    })
   }
 
   hash(object) {
