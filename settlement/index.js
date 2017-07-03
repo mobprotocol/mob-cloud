@@ -2,7 +2,7 @@ import Promise from 'bluebird'
 import sublevel from 'level-sublevel'
 import Trie from 'merkle-patricia-tree'
 import { List } from 'immutable'
-import { sha3 } from 'ethereumjs-utl'
+import { sha3 } from 'ethereumjs-util'
 
 export default class Settlement {
   constructor(params) {
@@ -33,18 +33,23 @@ export default class Settlement {
   }
 
   insertSettlement(_settlement) {
+    console.log(2)
     return new Promise((resolve, reject) => {
-      return this.timeStamp()
-    }).then((timestamp) => {
-      return _settlement.time = timeStamp
-    }).then(() => {
-      return action(_settlement)
-    }).then(() => {
-      return insertion(_settlement)
-    }).then(() => {
-      resolve(true)
-    }).catch((err) => {
-      reject(err)
+      return Promise.delay(0)
+      .then(() => {
+        return this.timeStamp()
+      }).then((timestamp) => {
+        console.log('timetamp', timestamp)
+        return _settlement.time = timeStamp
+      }).then(() => {
+        return action(_settlement)
+      }).then(() => {
+        return insertion(_settlement)
+      }).then(() => {
+        resolve(true)
+      }).catch((err) => {
+        reject(err)
+      })
     })
   }
 
@@ -69,6 +74,7 @@ export default class Settlement {
   }
 
   timeStamp() {
+    console.log(3)
     return new Date().getTime()
   }
 

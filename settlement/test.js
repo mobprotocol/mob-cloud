@@ -27,7 +27,8 @@ export function submitSettlements() {
     .then(() => {
       return generateSettlement()
     }).then((_settlement) => {
-      return settlement.queue = settlement.queue.unshift(_settlement)
+      console.log(1)
+      return settlement.insertSettlement(_settlement)
     }).then(() => {
       console.log('settlement.queue', settlement.queue)
     }).catch((err) => {
