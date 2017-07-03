@@ -1,5 +1,4 @@
-import { compile } from '../web3/compile'
-import Web3Interface from '../web3/web3'
+import Eths6 from '../eths6/index'
 
 export default class Asset {
   constructor(params) {
@@ -8,6 +7,11 @@ export default class Asset {
     this.symbol = params.symbol
     this.supply = params.supply
     this.setupTokenContract()
+    this.contract = new Eths6({
+      file: './Asset.sol',
+      compile: true,
+      deploy: true,
+    })
   }
 
   setupTokenContract() {
