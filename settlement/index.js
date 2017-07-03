@@ -40,12 +40,16 @@ export default class Settlement {
     }).then(() => {
       return action(_settlement)
     }).then(() => {
-      return mutation(_settlement)
+      return insertion(_settlement)
     }).then(() => {
       resolve(true)
     }).catch((err) => {
       reject(err)
     })
+  }
+
+  popSettlement() {
+
   }
 
   action(_settlement) {
@@ -68,15 +72,23 @@ export default class Settlement {
     return new Date().getTime()
   }
 
-  mutation(_settlement) {
+  insertion(_settlement) {
     return new Promise((resolve, reject) => {
       return Promise.delay(0)
       .then(() => {
         return this.queue = this.queue.unshift(_settlement)
       }).then(() => {
         return snapshot()
+      }).then(() => {
+        resolve(true)
+      }).catch((err) => {
+        reject(err)
       })
     })
+  }
+
+  pop() {
+    return new Prom
   }
 
   snapshot() {
