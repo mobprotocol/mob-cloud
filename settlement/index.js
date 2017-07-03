@@ -88,7 +88,18 @@ export default class Settlement {
   }
 
   pop() {
-    return new Prom
+    return new Promise((resolve, reject) => {
+      return Promise.delay(0)
+      .then(() => {
+        return this.queue = this.queue.pop()
+      }).then(() => {
+        return snapshot()
+      }).then(() => {
+        resolve(true)
+      }).catch((err) => {
+        reject(err)
+      })
+    })
   }
 
   snapshot() {
