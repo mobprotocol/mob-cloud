@@ -7,6 +7,7 @@ export default class Eths6 {
   constructor(params) {
     this.web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:8545")
     this.file = params.file,
+    params.
     this.setupContract(params.compile, params.deploy)
   }
 
@@ -21,11 +22,12 @@ export default class Eths6 {
         if (deploy) {
           return this.deploy()
         }
-        return deploy()
       }).then(() => {
         return listeners()
       }).then(() => {
-        
+        resolve(true)
+      }).catch((err) => {
+        reject(err)
       })
     })
   }
@@ -35,7 +37,13 @@ export default class Eths6 {
       return Promise.delay(0)
       .then(() => {
         return this.getCompiled()
+      }).then((abi) => {
+        reuturn
       })
     })
+  }
+
+  listeners(events) {
+    console.log('### setting up event listeners')
   }
 }
