@@ -10,7 +10,11 @@ export function exchangeOperator() {
   return new Promise((resolve, reject) => {
     return Promise.delay(0)
     .then(() => {
-      return operator = new User()
+      return operator = new User('operator')
+    }).then(() => {
+      resolve(true)
+    }).catch((err) => {
+      reject(err)
     })
   })
 }
@@ -19,7 +23,7 @@ export function traders() {
   return new Promise((resolve, reject) => {
     return Promise.delay(500)
     .then(() => {
-      return users[swarm_amount] = new User()
+      return users[swarm_amount] = new User(swarm_amount)
     }).then(() => {
       if (swarm_amount <= 0) {
         resolve(true)
@@ -39,6 +43,7 @@ export function createAccounts() {
     .then(() => {
       return exchangeOperator()
     }).then(() => {
+      console.log('here')
       return traders()
     }).then(() => {
       resolve(true)
