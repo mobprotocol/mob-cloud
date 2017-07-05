@@ -5,9 +5,11 @@ const jsonfile = Promise.promisifyAll(require('jsonfile'))
 
 export default class Eths6 {
   constructor(params) {
-    this.web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:8545")
+    this.web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:8545"),
     this.file = params.file,
-    this.setupContract(params.compile, params.deploy)
+    this.setupContract()
+    this.address
+    this.contract
   }
 
   /**
@@ -16,18 +18,20 @@ export default class Eths6 {
   //////////////////////////////////////////////////////////////////////////////
   */
 
-  setupContract(compile, deploy) {
+  setupContract() {
     return new Promise((resolve, reject) => {
       return Promise.delay(0)
       .then(() => {
         return this.checkCompiledExists()
       }).then((bool) => {
         if(!bool) {
-          return this.compile
+          return this.compile()
         }
         return true
       }).then(() => {
-        return listeners()
+        return this.deploy()
+      }).then(() => {
+        return this.listenerDaemon()
       }).then(() => {
         resolve(true)
       }).catch((err) => {
@@ -50,12 +54,14 @@ export default class Eths6 {
     return new Promise((resolve, reject) => {
       return Promise.delay(0)
       .then(() => {
-        return this.checkCompiledExists(this.file)
-      }).then(() => {
-        return getCompiled(this.file)
+        return this.getCompiled(this.file)
       }).then((abi) => {
-        return deployContract()
-      }).then(())
+        return this.deployContract()
+      }).then(() => {
+        resolve(true)
+      }).catch((err) => {
+        reject(err)
+      })
     })
   }
 
