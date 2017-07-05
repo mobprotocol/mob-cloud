@@ -14,6 +14,7 @@ export default class Eths6 {
     this.abi
     this.bytecode
     this.gasEstimate
+    this.contractParams
   }
 
   /**
@@ -170,9 +171,20 @@ export default class Eths6 {
         this.abi = compiled.contracts[this.fil ].bytecode
         return this.gasEstimate = web3.eth.estimageGAs({ data: this.bytecode })
       }).then(() => {
-
+        return this.contract = web3.eth.contract(JSON.parse(this.abi))
       }).then(() => {
-
+        return ({
+          from: this.owner,
+          data: this.bytecode,
+          gas: this.gasEstimate
+        })
+      }).then((sendObject) => {
+        return this.instance = this.contract.new(
+          ...contractParams,
+          sendObject
+        )
+      }).then((txHash) => {
+        console.log('### contract deployed w/ tx hash', txHash)
       }).catch((err) => {
         reject(err)
       })
