@@ -10,6 +10,10 @@ export default class Eths6 {
     this.setupContract()
     this.address
     this.contract
+    this.instance
+    this.abi
+    this.bytecode
+    this.gasEstimate
   }
 
   /**
@@ -56,7 +60,7 @@ export default class Eths6 {
       .then(() => {
         return this.getCompiled(this.file)
       }).then((abi) => {
-        return this.deployContract()
+        return this.deployContract(abi)
       }).then(() => {
         resolve(true)
       }).catch((err) => {
@@ -79,6 +83,18 @@ export default class Eths6 {
     })
   }
 
+  deployContract(abi) {
+    return new Promise((resolve, reject) => {
+      return Promise.delay(0)
+      .then(() => {
+        return this.contract = web3.eth.contract(abi)
+      }).then(() => {
+        return ([])
+      }).then((params) => {
+
+      })
+    })
+  }
 
   /**
   //////////////////////////////////////////////////////////////////////////////
