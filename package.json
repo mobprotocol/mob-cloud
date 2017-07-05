@@ -1,4 +1,4 @@
-{
+ken{
   "name": "mob-instance",
   "version": "0.0.1",
   "description": "instance of the mob protocol",
@@ -6,6 +6,7 @@
   "scripts": {
     "token-factory": "babel-node ./factory/index.js --presets es2015",
     "create-network": "babel-node ./network/index.js --presets es2015",
+    "user-swarm": "babel-node ./users/swarm.js --presets es2015",
     "api": "babel-node ./api/index.js --presets es2015",
     "socket": "babel-node ./socket/index.js --presets es2015",
     "orderbook-tests": "babel-node ./orderbook/test.js --presets es2015",
