@@ -1,7 +1,7 @@
 import Promise from 'bluebird'
 import { createPermutation } from '../permutation/index'
 import { contracsts, pair } from './contracts'
-import Asset from '../asset/asset'
+import Asset from '../asset/index'
 
   // createPermutation('tokenA', 'tokenB')
 
@@ -22,10 +22,6 @@ export function tokenPair() {
       reject(err)
     })
   })
-}
-
-export function fullyConnectedTopology() {
-
 }
 
 tokenPair()
