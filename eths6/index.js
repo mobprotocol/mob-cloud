@@ -21,13 +21,9 @@ export default class Eths6 {
     return new Promise((resolve, reject) => {
       return Promise.delay(0)
       .then(() => {
-        // if (compile) {
-        //   return this.compile(this.file)
-        // }
+        return this.compile()
       }).then(() => {
-        if (deploy) {
-          return this.deploy()
-        }
+        return this.deploy()
       }).then(() => {
         return listeners()
       }).then(() => {
@@ -48,10 +44,12 @@ export default class Eths6 {
     return new Promise((resolve, reject) => {
       return Promise.delay(0)
       .then(() => {
-        return this.getCompiled()
+        return this.checkCompiledExists(this.file)
+      }).then(() => {
+        return getCompiled(this.file)
       }).then((abi) => {
-        reuturn
-      })
+        return deployContract()
+      }).then(())
     })
   }
 
@@ -69,9 +67,6 @@ export default class Eths6 {
     })
   }
 
-  listeners(events) {
-    console.log('### setting up event listeners')
-  }
 
   /**
   //////////////////////////////////////////////////////////////////////////////
@@ -95,6 +90,13 @@ export default class Eths6 {
       })
     })
   }
+
+  checkCompiledExists() {
+    return new Promise((resolve, reject) => {
+
+    })
+  }
+
 
   getContractData(directory, file) {
     console.log('### getting contract data')
@@ -143,5 +145,8 @@ export default class Eths6 {
   //////////////////////////////////////////////////////////////////////////////
   */
 
-  
+  listeners(events) {
+    console.log('### setting up event listeners')
+  }
+
 }
