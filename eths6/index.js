@@ -7,7 +7,6 @@ export default class Eths6 {
   constructor(params) {
     this.web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:8545")
     this.file = params.file,
-    params.
     this.setupContract(params.compile, params.deploy)
   }
 
@@ -21,9 +20,12 @@ export default class Eths6 {
     return new Promise((resolve, reject) => {
       return Promise.delay(0)
       .then(() => {
-        return this.compile()
-      }).then(() => {
-        return this.deploy()
+        return this.checkCompiledExists()
+      }).then((bool) => {
+        if(!bool) {
+          return this.compile
+        }
+        return true
       }).then(() => {
         return listeners()
       }).then(() => {
@@ -32,6 +34,10 @@ export default class Eths6 {
         reject(err)
       })
     })
+  }
+
+  listenderDaemon() {
+
   }
 
   /**
@@ -78,6 +84,7 @@ export default class Eths6 {
     return new Promise((resolve, reject) => {
       return Promise.delay(0)
       .then(() => {
+      }).then(() => {
         return getContractData(directory, file)
       }).then((data) => {
         return solcCompile(data)
@@ -93,7 +100,12 @@ export default class Eths6 {
 
   checkCompiledExists() {
     return new Promise((resolve, reject) => {
+      return Promise.delay(0)
+      .then(() => {
+        return fs.fileExist
+      }).then(() => {
 
+      })
     })
   }
 
@@ -103,7 +115,7 @@ export default class Eths6 {
     return new Promise((resolve, reject) => {
       return Promise.delay(0)
       .then(() => {
-        return fs.readFileAsync(`${directory}/${file}`)
+        return fs.readFileAsync(`${directory}/${file}.sol`)
       }).then((file) => {
         resolve(file.toString())
       }).catch((err) => {
