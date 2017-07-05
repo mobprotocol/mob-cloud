@@ -50,54 +50,6 @@ export default class Eths6 {
 
   /**
   //////////////////////////////////////////////////////////////////////////////
-  DEPLOY CONTRACT
-  //////////////////////////////////////////////////////////////////////////////
-  */
-
-  deploy() {
-    return new Promise((resolve, reject) => {
-      return Promise.delay(0)
-      .then(() => {
-        return this.getCompiled(this.file)
-      }).then((abi) => {
-        return this.deployContract(abi)
-      }).then(() => {
-        resolve(true)
-      }).catch((err) => {
-        reject(err)
-      })
-    })
-  }
-
-  getCompiled() {
-    return new Promise((resolve, reject) => {
-      const file = this.file.slice(-3)
-      console.log('file', file)
-      jsonfile.readFileAsync(`${__dirname}/${file}.compiled.json`)
-      .then((data) => {
-        console.log('data', data)
-        resolve(true)
-      }).catch((err) => {
-        reject(err)
-      })
-    })
-  }
-
-  deployContract(abi) {
-    return new Promise((resolve, reject) => {
-      return Promise.delay(0)
-      .then(() => {
-        return this.contract = web3.eth.contract(abi)
-      }).then(() => {
-        return ([])
-      }).then((params) => {
-
-      })
-    })
-  }
-
-  /**
-  //////////////////////////////////////////////////////////////////////////////
   COMPILE CONTRACT
   //////////////////////////////////////////////////////////////////////////////
   */
@@ -169,6 +121,58 @@ export default class Eths6 {
         return jsonfile.writeFileAsync(`${directory}/${fileName}.compiled.json`, compiled)
       }).then(() => {
         resolve(true)
+      }).catch((err) => {
+        reject(err)
+      })
+    })
+  }
+
+  /**
+  //////////////////////////////////////////////////////////////////////////////
+  DEPLOY CONTRACT
+  //////////////////////////////////////////////////////////////////////////////
+  */
+
+  deploy() {
+    return new Promise((resolve, reject) => {
+      return Promise.delay(0)
+      .then(() => {
+        return this.getCompiled(this.file)
+      }).then((compiled) => {
+        return this.deployContract(compiled)
+      }).then(() => {
+        resolve(true)
+      }).catch((err) => {
+        reject(err)
+      })
+    })
+  }
+
+  getCompiled() {
+    return new Promise((resolve, reject) => {
+      const file = this.file.slice(-3)
+      console.log('file', file)
+      jsonfile.readFileAsync(`${__dirname}/${file}.compiled.json`)
+      .then((data) => {
+        console.log('data', data)
+        resolve(true)
+      }).catch((err) => {
+        reject(err)
+      })
+    })
+  }
+
+  deployContract(compiled) {
+    return new Promise((resolve, reject) => {
+      return Promise.delay(0)
+      .then(() => {
+        this.bytecode = compiled.contracts[this.file].interface
+        this.abi = compiled.contracts[this.fil ].bytecode
+        return this.gasEstimate = web3.eth.estimageGAs({ data: this.bytecode })
+      }).then(() => {
+
+      }).then(() => {
+
       }).catch((err) => {
         reject(err)
       })
