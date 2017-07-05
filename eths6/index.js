@@ -102,9 +102,11 @@ export default class Eths6 {
     return new Promise((resolve, reject) => {
       return Promise.delay(0)
       .then(() => {
-        return fs.fileExist
-      }).then(() => {
-
+        return fs.existsAsync(`${__dirname}/${this.file}.compilied.json`)
+      }).then((res) => {
+        resolve(res)
+      }).catch((err) => {
+        reject(err)
       })
     })
   }
