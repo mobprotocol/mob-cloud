@@ -8,7 +8,7 @@ export default class Asset {
     this.supply = params.supply
     this.setupTokenContract()
     this.contract = new Eths6({
-      file: './Asset.sol',
+      file: Asset,
       compile: true,
       deploy: true,
     })
