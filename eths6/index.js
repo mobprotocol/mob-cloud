@@ -7,6 +7,7 @@ export default class Eths6 {
   constructor(params) {
     this.web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:8545"),
     this.file = params.file,
+    this.owner = params.file
     this.setupContract()
     this.address
     this.contract
