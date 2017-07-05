@@ -13,9 +13,9 @@ export default class User {
     return new Promise((resolve, reject) => {
       this.dk = keythereum.create({ keyBytes: 32, ivBytes: 16 }, (res) => {
           this.dk = res
-          console.log('privateKey', this.dk.privateKey.toString('utf-8'))
-          console.log('iv', this.dk.iv.toString('utf-8'))
-          console.log('salt', this.dk.salt.toString('utf-8'))
+          console.log('privateKey', this.dk.privateKey.toString('hex'))
+          console.log('iv', this.dk.iv.toString('hex'))
+          console.log('salt', this.dk.salt.toString('hex'))
           resolve(true)
       })
     })
