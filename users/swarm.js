@@ -21,7 +21,7 @@ export function exchangeOperator() {
 
 export function traders() {
   return new Promise((resolve, reject) => {
-    return Promise.delay(500)
+    return Promise.delay(1500)
     .then(() => {
       return users[swarm_amount] = new User(swarm_amount)
     }).then(() => {
