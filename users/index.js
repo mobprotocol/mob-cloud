@@ -7,7 +7,7 @@ export default class User {
   }
 
   generateAddress() {
-
+    
   }
 
 }
