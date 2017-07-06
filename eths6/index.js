@@ -1,12 +1,12 @@
 import Web3 from 'web3'
-import Promise from 'buebird'
+import Promise from 'bluebird'
 const fs = Promise.promisifyAll(require('fs'))
 const jsonfile = Promise.promisifyAll(require('jsonfile'))
 
 export default class Eths6 {
   constructor(params) {
-    this.web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:8545"),
-    this.file = params.file,
+    this.web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:8545"))
+    this.file = params.file
     this.owner = params.file
     this.setupContract()
     this.address
@@ -61,11 +61,11 @@ export default class Eths6 {
       return Promise.delay(0)
       .then(() => {
       }).then(() => {
-        return getContractData(directory, file)
+        return this.getContractData(directory, file)
       }).then((data) => {
-        return solcCompile(data)
+        return this.solcCompile(data)
       }).then((compiled) => {
-        return writeCompiledFile(directory, file, compiled)
+        return this.writeCompiledFile(directory, file, compiled)
       }).then(() => {
         resolve(true)
       }).catch((err) => {
@@ -88,13 +88,15 @@ export default class Eths6 {
   }
 
 
-  getContractData(directory, file) {
+  getContractData() {
     console.log('### getting contract data')
     return new Promise((resolve, reject) => {
       return Promise.delay(0)
       .then(() => {
-        return fs.readFileAsync(`${directory}/${file}.sol`)
+        console.log('filename', __dirname, this.file)
+        return fs.readFileAsync(`${__dirname}/${this.file}.sol`)
       }).then((file) => {
+        console.log('file data', file.toString())
         resolve(file.toString())
       }).catch((err) => {
         reject(err)

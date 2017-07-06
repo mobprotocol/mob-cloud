@@ -6,7 +6,7 @@ export default class Asset {
     this.symbol = params.symbol
     this.supply = params.supply
     this.contract = new Eths6({
-      file: Asset,
+      file: params.file,
     })
   }
 }
