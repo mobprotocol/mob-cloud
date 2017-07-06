@@ -31,8 +31,8 @@ export default class Eths6 {
       return Promise.delay(0)
       .then(() => {
         return this.checkCompiledExists()
-      }).then((stats) => {
-        if(!stats) {
+      }).then((bool) => {
+        if(!bool) {
           return this.compile()
         }
         return true
@@ -79,9 +79,10 @@ export default class Eths6 {
   checkCompiledExists() {
     return new Promise((resolve, reject) => {
       return fs.stat(`${this.dir}/${this.file}.compiled.json`, (err, stats) => {
-        if(err) { reject(err) }
-        console.log('stats', stats)
-        resolve(stats)
+        if(err) {
+          resolve(false)
+        }
+        resolve(true)
       })
     })
   }
@@ -95,7 +96,6 @@ export default class Eths6 {
         console.log('filename', __dirname, this.file)
         return fs.readFileAsync(`${this.dir}/${this.file}.sol`)
       }).then((file) => {
-        console.log('file data', file.toString())
         resolve(file.toString())
       }).catch((err) => {
         reject(err)
@@ -120,8 +120,7 @@ export default class Eths6 {
     return new Promise((resolve, reject) => {
       return Promise.delay(0)
       .then(() => {
-        let fileName = file.slice(0, -4)
-        return jsonfile.writeFileAsync(`${directory}/${fileName}.compiled.json`, compiled)
+        return jsonfile.writeFileAsync(`${this.dir}/${this.file}.compiled.json`, compiled)
       }).then(() => {
         resolve(true)
       }).catch((err) => {
@@ -157,6 +156,7 @@ export default class Eths6 {
       .then((data) => {
         resolve(data)
       }).catch((err) => {
+        this.compile()
         reject(err)
       })
     })
@@ -166,6 +166,7 @@ export default class Eths6 {
     return new Promise((resolve, reject) => {
       return Promise.delay(0)
       .then(() => {
+        console.log('compiled.contracts', compiled.contracts)
         this.bytecode = compiled.contracts[this.file].interface
         this.abi = compiled.contracts[this.file].bytecode
         return this.gasEstimate = web3.eth.estimageGAs({ data: this.bytecode })
