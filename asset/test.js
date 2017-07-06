@@ -16,7 +16,10 @@ export function createAsset() {
       return asset = new Asset({
         file: 'Asset',
         deploy: true,
-        ownder: operator.publicKey
+        name: 'Mob',
+        ticker: 'MOB',
+        supply: 1000000000,
+        owner: operator.publicKey
       })
     }).then(() => {
       resolve(true)
