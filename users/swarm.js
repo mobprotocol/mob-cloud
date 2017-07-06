@@ -25,6 +25,8 @@ export function traders() {
     .then(() => {
       return users[swarm_amount] = new User(swarm_amount)
     }).then(() => {
+      return users[swarm_amount].setupAccount()
+    }).then(() => {
       if (swarm_amount <= 0) {
         resolve(true)
       } else {

@@ -17,7 +17,6 @@ export default class User {
     this.name = name
     this.privateKey
     this.publicKey
-    this.setupAccount()
   }
 
   setupAccount() {
@@ -57,6 +56,6 @@ export default class User {
   }
 
   writeToFile() {
-    console.log('### writing account to json file')
+
   }
 }
