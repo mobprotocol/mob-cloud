@@ -33,7 +33,6 @@ export default class Eths6 {
         return this.checkCompiledExists()
       }).then((stats) => {
         if(!stats) {
-          console.log('here')
           return this.compile()
         }
         return true
@@ -78,23 +77,6 @@ export default class Eths6 {
   }
 
   checkCompiledExists() {
-    // return new Promise((resolve, reject) => {
-    //   return Promise.delay(0)
-    //   .then(() => {
-    //     return fs.existsAsync(`${this.dir}/${this.file}.compiled.json`)
-    //   }).then((res) => {
-    //     console.log('res', res)
-    //     resolve(res)
-    //   }).catch((err) => {
-    //     reject(err)
-    //   })
-    // })
-
-    // fs.existsAsync(`${this.dir}/${this.file}.compiled.json`, (res) => {
-    //   console.log('res', res)
-    //   return res
-    // })
-
     return new Promise((resolve, reject) => {
       return fs.stat(`${this.dir}/${this.file}.compiled.json`, (err, stats) => {
         if(err) { reject(err) }
@@ -102,11 +84,6 @@ export default class Eths6 {
         resolve(stats)
       })
     })
-
-    // fs.existsAsync(`${this.dir}/${this.file}.compiled.json`).then((res) => {
-    //   console.log('res', res)
-    //   return res
-    // })
   }
 
 
@@ -178,7 +155,6 @@ export default class Eths6 {
     return new Promise((resolve, reject) => {
       jsonfile.readFileAsync(`${this.dir}/${this.file}.compiled.json`)
       .then((data) => {
-        console.log('data', data)
         resolve(data)
       }).catch((err) => {
         reject(err)
