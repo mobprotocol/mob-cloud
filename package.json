@@ -1,4 +1,4 @@
-ken{
+{
   "name": "mob-instance",
   "version": "0.0.1",
   "description": "instance of the mob protocol",
@@ -11,7 +11,8 @@ ken{
     "socket": "babel-node ./socket/index.js --presets es2015",
     "orderbook-tests": "babel-node ./orderbook/test.js --presets es2015",
     "matching-tests": "babel-node ./match/test.js",
-    "settlement-tests": "babel-node ./settlement/test.js --presets es2015"
+    "settlement-tests": "babel-node ./settlement/test.js --presets es2015",
+    "asset-tests": "babel-node ./asset/test.js"
   },
   "repository": {
     "type": "git",
