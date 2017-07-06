@@ -31,8 +31,9 @@ export default class Eths6 {
       return Promise.delay(0)
       .then(() => {
         return this.checkCompiledExists()
-      }).then((bool) => {
-        if(!bool) {
+      }).then((stats) => {
+        if(!stats) {
+          console.log('here')
           return this.compile()
         }
         return true
@@ -175,9 +176,7 @@ export default class Eths6 {
 
   getCompiled() {
     return new Promise((resolve, reject) => {
-      const file = this.file.slice(-3)
-      console.log('file', file)
-      jsonfile.readFileAsync(`${__dirname}/${file}.compiled.json`)
+      jsonfile.readFileAsync(`${this.dir}/${this.file}.compiled.json`)
       .then((data) => {
         console.log('data', data)
         resolve(data)
