@@ -9,9 +9,9 @@ export default class Asset {
       file: params.file,
       dir: __dirname,
       contractParams: [
-        this.name,
-        this.symbol,
-        this.supply
+        params.name,
+        params.symbol,
+        params.supply
       ]
     })
   }

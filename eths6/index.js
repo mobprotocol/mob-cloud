@@ -18,7 +18,7 @@ export default class Eths6 {
     this.abi
     this.bytecode
     this.gasEstimate
-    this.contractParams = params.contracParams
+    this.contractParams = params.contractParams
   }
 
   /**
@@ -182,8 +182,9 @@ export default class Eths6 {
           gas: this.gasEstimate
         })
       }).then((sendObject) => {
+        console.log('this.contractParams', this.contractParams)
         return this.instance = this.contract.new(
-          ...contractParams,
+          ...this.contractParams,
           sendObject
         )
       }).then((txHash) => {
