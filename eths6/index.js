@@ -77,17 +77,35 @@ export default class Eths6 {
   }
 
   checkCompiledExists() {
+    // return new Promise((resolve, reject) => {
+    //   return Promise.delay(0)
+    //   .then(() => {
+    //     return fs.existsAsync(`${this.dir}/${this.file}.compiled.json`)
+    //   }).then((res) => {
+    //     console.log('res', res)
+    //     resolve(res)
+    //   }).catch((err) => {
+    //     reject(err)
+    //   })
+    // })
+
+    // fs.existsAsync(`${this.dir}/${this.file}.compiled.json`, (res) => {
+    //   console.log('res', res)
+    //   return res
+    // })
+
     return new Promise((resolve, reject) => {
-      return Promise.delay(0)
-      .then(() => {
-        return fs.existsAsync(`${this.dir}/${this.file}.compilied.json`)
-      }).then((res) => {
-        console.log('res', res)
-        resolve(res)
-      }).catch((err) => {
-        reject(err)
+      return fs.stat(`${this.dir}/${this.file}.compiled.json`, (err, stats) => {
+        if(err) { reject(err) }
+        console.log('stats', stats)
+        resolve(stats)
       })
     })
+
+    // fs.existsAsync(`${this.dir}/${this.file}.compiled.json`).then((res) => {
+    //   console.log('res', res)
+    //   return res
+    // })
   }
 
 
