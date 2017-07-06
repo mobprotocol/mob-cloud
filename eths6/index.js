@@ -1,5 +1,6 @@
 import Web3 from 'web3'
 import Promise from 'bluebird'
+import solc from 'solc'
 const fs = Promise.promisifyAll(require('fs'))
 const jsonfile = Promise.promisifyAll(require('jsonfile'))
 
@@ -79,8 +80,9 @@ export default class Eths6 {
     return new Promise((resolve, reject) => {
       return Promise.delay(0)
       .then(() => {
-        return fs.existsAsync(`${__dirname}/${this.file}.compilied.json`)
+        return fs.existsAsync(`${this.dir}/${this.file}.compilied.json`)
       }).then((res) => {
+        console.log('res', res)
         resolve(res)
       }).catch((err) => {
         reject(err)
@@ -95,7 +97,7 @@ export default class Eths6 {
       return Promise.delay(0)
       .then(() => {
         console.log('filename', __dirname, this.file)
-        return fs.readFileAsync(`${__dirname}/${this.file}.sol`)
+        return fs.readFileAsync(`${this.dir}/${this.file}.sol`)
       }).then((file) => {
         console.log('file data', file.toString())
         resolve(file.toString())
