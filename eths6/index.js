@@ -157,7 +157,7 @@ export default class Eths6 {
       jsonfile.readFileAsync(`${__dirname}/${file}.compiled.json`)
       .then((data) => {
         console.log('data', data)
-        resolve(true)
+        resolve(data)
       }).catch((err) => {
         reject(err)
       })
@@ -169,7 +169,7 @@ export default class Eths6 {
       return Promise.delay(0)
       .then(() => {
         this.bytecode = compiled.contracts[this.file].interface
-        this.abi = compiled.contracts[this.fil ].bytecode
+        this.abi = compiled.contracts[this.file].bytecode
         return this.gasEstimate = web3.eth.estimageGAs({ data: this.bytecode })
       }).then(() => {
         return this.contract = web3.eth.contract(JSON.parse(this.abi))
