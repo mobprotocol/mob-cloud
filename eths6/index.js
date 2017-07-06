@@ -18,7 +18,7 @@ export default class Eths6 {
     this.abi
     this.bytecode
     this.gasEstimate
-    this.contractParams
+    this.contractParams = params.contracParams
   }
 
   /**
