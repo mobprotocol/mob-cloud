@@ -7,6 +7,7 @@ const jsonfile = Promise.promisifyAll(require('jsonfile'))
 export default class Eths6 {
   constructor(params) {
     this.web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:8545"))
+    this.eth = Promise.promisifyAll(this.web3.eth)
     this.file = params.file
     this.owner = params.file
     this.dir = params.dir
@@ -166,12 +167,12 @@ export default class Eths6 {
     return new Promise((resolve, reject) => {
       return Promise.delay(0)
       .then(() => {
-        console.log('compiled.contracts', compiled.contracts)
-        this.bytecode = compiled.contracts[this.file].interface
-        this.abi = compiled.contracts[this.file].bytecode
-        return this.gasEstimate = web3.eth.estimageGAs({ data: this.bytecode })
-      }).then(() => {
-        return this.contract = web3.eth.contract(JSON.parse(this.abi))
+        this.bytecode = compiled.contracts[':' + this.file].bytecode
+        this.abi = compiled.contracts[':' + this.file].interface
+        return this.gasEstimate = this.web3.eth.estimateGas({ data: this.bytecode })
+      }).then((estimate) => {
+        console.log('estimate', estimate  )
+        return this.contract = this.web3.eth.contract(JSON.parse(this.abi))
       }).then(() => {
         return ({
           from: this.owner,
