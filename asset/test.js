@@ -4,8 +4,6 @@ import Eths6 from '../eths6/index'
 import Asset from './index'
 import User from '../users/index'
 
-
-
 let operator
 let asset
 

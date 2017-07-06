@@ -10,9 +10,10 @@ export default class Asset {
       dir: __dirname,
       contractParams: [
         params.name,
-        params.symbol,
+        params.ticker,
         params.supply
-      ]
+      ],
+      owner: params.owner
     })
   }
 }

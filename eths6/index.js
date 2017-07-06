@@ -9,7 +9,8 @@ export default class Eths6 {
     this.web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:8545"))
     this.eth = Promise.promisifyAll(this.web3.eth)
     this.file = params.file
-    this.owner = params.file
+    console.log('params', params)
+    this.owner = params.owner
     this.dir = params.dir
     this.setupContract()
     this.address
@@ -175,14 +176,15 @@ export default class Eths6 {
         console.log('estimate', estimate)
         return this.contract = this.web3.eth.contract(JSON.parse(this.abi))
       }).then(() => {
-        console.log('this.contract', this.contract)
+        // console.log('this.contract', this.contract)
         return ({
           from: this.owner,
           data: this.bytecode,
           gas: this.gasEstimate
         })
       }).then((sendObject) => {
-        console.log('this.contractParams', this.contractParams)
+        console.log('this.contractParams', ...this.contractParams)
+        console.log('this.owner', this.owner)
         return this.instance = this.contract.new(
           ...this.contractParams,
           sendObject
