@@ -8,6 +8,7 @@ export default class Eths6 {
   constructor(params) {
     this.web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:8545"))
     this.eth = Promise.promisifyAll(this.web3.eth)
+    this.personal = Promise.promisifyAll(this.web3.personal)
     this.file = params.file
     console.log('params', params)
     this.owner = params.owner
