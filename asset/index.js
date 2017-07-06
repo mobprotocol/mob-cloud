@@ -7,7 +7,11 @@ export default class Asset {
     this.supply = params.supply
     this.contract = new Eths6({
       file: params.file,
-      dir: __dirname
+      dir: __dirname,
+      name: params.name,
+      symbol: params.symbol,
+      supply: params.supply
+
     })
   }
 }
