@@ -41,6 +41,7 @@ export default class User {
     return new Promise((resolve, reject) => {
       return keythereum.create({ keyBytes: 32, ivBytes: 16 }, (res) => {
         this.dk = res
+        this.privateKey = this.dk.privateKey.toString('hex')
         resolve(true)
       })
     })
@@ -48,9 +49,8 @@ export default class User {
 
   generatePublicKey() {
     return new Promise((resolve, reject) => {
-      console.log('1......')
       return keythereum.dump('password', this.dk.privateKey, this.dk.salt, this.dk.iv, options, (res) => {
-        console.log('res', res)
+        this.publicKey = res.address
         resolve(true)
       })
     })

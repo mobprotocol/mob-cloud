@@ -43,7 +43,6 @@ export function createAccounts() {
     .then(() => {
       return exchangeOperator()
     }).then(() => {
-      console.log('here')
       return traders()
     }).then(() => {
       resolve(true)
