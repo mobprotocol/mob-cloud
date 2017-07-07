@@ -12,7 +12,7 @@
     "orderbook-tests": "babel-node ./orderbook/test.js --presets es2015",
     "matching-tests": "babel-node ./match/test.js",
     "settlement-tests": "babel-node ./settlement/test.js --presets es2015",
-    "asset-tests": "babel-node ./asset/test.js"
+    "asset-tests": "babel-node ./asset/test.js --presets es2015"
   },
   "repository": {
     "type": "git",
@@ -40,6 +40,7 @@
     "babel-preset-stage-2": "^6.24.1",
     "bluebird": "^3.5.0",
     "double-ended-queue": "^2.1.0-0",
+    "ethereumjs-testrpc": "^4.0.1",
     "ethereumjs-util": "^5.1.2",
     "express": "^4.15.3",
     "immutable": "^3.8.1",
