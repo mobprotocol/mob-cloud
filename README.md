@@ -33,7 +33,7 @@ A cleaning Agent, also implemented as a daemon, is continually watching the bott
 
 ## Settlement
 
-The matching event accrues settlements which are appended to the Settlement stack.
+The matching process accrues settlements which are appended to the Settlement queue. The Settlement ledger is implemented as a Last-in First-out stack. 
 
 ## Security Analysis
 
