@@ -3,6 +3,7 @@
 ### ERC20 <--> ERC20 Exchange
 
 ## Summary
+
 This is a cloud based exhcange network for erc20 smart contracts. Given a set of n tokens the program creates a `n!/((n-2!)2!)` `permutations`, or a fully connected topology between the token set.
 
 Each permutation is composed of 4 basic elements that create a self maintaining order-book, matching, and settlement engine. The result is a parallelizable double-action network for the Ethereum ecosystem.
@@ -18,10 +19,24 @@ SellA and SellB ledger maintain a sorted set of orders. Two `double-ended-queue`
 
 The protocol uses a price-priority queueing system, meaning the best price (least asks) are matched first. The orderbook ledgers are always perfectly sorted at any given point in time.
 
+## Matching
+
+The algorithm or `Agent` matches in continuous time with fast memory operations and async disk writes.
+
+A daemon watches the top of the `Orderbook` and matches the best order in the Sell Ledger. The matching agent will choose with 50% probability `SellA or SellB` ledger. It takes the best order in the market and iterates through the opposite ledger until the order is exhausted, the order moves out of the market, or the ledger is emptied.
+
+The matching Agent can only match orders `in the market`, meaning both parties are guaranteed at least as good of a deal as the ordered. Send amounts are calculated for the atomic swap between the two participants based on their price preference and the resulting spread left in the liquidity pool is sent to the Matching Agent. This means matching Agents are economically incentivized to maintain the price priority.
+
+## Cleaning
+
+## Settlement
+
+The matching event accrues settlements which are appended to the Settlement stack.
 
 ## Security Analysis
 
 ## Peer Servers
+
 ## Install
 This program runs using `npm 5` & `node v8.1.2`
 
