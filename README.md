@@ -29,6 +29,8 @@ The matching Agent can only match orders `in the market`, meaning both parties a
 
 ## Cleaning
 
+A cleaning Agent, also implemented as a daemon, is continually watching the bottom of the Sell ledgers. The algorithm enforces an eventually true upper-bound on the ledger size. The size can be set by the operator and should be based on the capabilities of the server in production. By default the size is set to `10,000` orders.
+
 ## Settlement
 
 The matching event accrues settlements which are appended to the Settlement stack.
