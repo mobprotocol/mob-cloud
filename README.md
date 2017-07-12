@@ -3,9 +3,9 @@
 ### ERC20 <--> ERC20 Exchange
 
 
-## Summary
+# Summary
 
-This is a cloud based exhcange network for erc20 smart contracts. Given a set of n tokens the program creates a `n!/((n-2!)2!)` `permutations`, or a fully connected topology between the token set.
+This is a cloud based exchange network for erc20 smart contracts. Given a set of n tokens the program creates a `n!/((n-2!)2!)` `permutations`, or a fully connected topology between the token set.
 
 Each permutation is composed of 4 basic elements that create a self maintaining order-book, matching, and settlement engine. The result is a parallelizable double-action network for the Ethereum ecosystem.
 
@@ -41,7 +41,7 @@ A cleaning Agent, also implemented as a daemon, is continually watching the bott
 The matching process accrues settlements which are appended to the Settlement queue. The Settlement ledger is implemented as a Last-in First-out stack.
 
 
-## Install
+# Install Mob
 This program runs using `npm 5` & `node v8.1.2`
 
 git clone https://github.com/mobprotocol/mob.git && cd mob-instance/
@@ -52,14 +52,7 @@ npm i npm@latest
 npm i ethereumjs-testrpc -g
 
 
-## Run MOB
-
-npm i
-
-1. npm run user-swarm
-2. npm run evm
-3. npm run
-
+# Run MOB
 
 ## USER SWARM
 
@@ -93,5 +86,5 @@ Creates a fully connected topology between the token contracts. Each permutation
 Random markov-chain simulation algorithm with fluctuating market price and volume.
 
 
-## Licensing
+# Licensing
 `THIS IS OPEN SOURCE SOFTWARE` I encourage anyone to run, test, and even implement a clone in production for an intended market. If you are a startup planning to ICO, you can host your own markets.
