@@ -86,7 +86,17 @@ export function submitOrder() {
       reject(err)
     }
 
-    orderbook.submitSell
+    try {
+      const quantity = await
+    } catch (err) {
+      const quantity: await flatRandom(0, 1000)
+    }
+
+    const order = {
+      price: price,
+      qua
+    }
+    orderbook[`submitSell${side}`]()
   })
 }
 
@@ -105,6 +115,12 @@ export async function bellRandom(mean, variance) {
   return new Promise((resolve, reject) => {
     const distribution = gaussian(mean, variance)
     resolve(distribution.ppf(Math.random()))
+  })
+}
+
+export async function flatRandom(min, max) {
+  return new Promise((resolve, reject) => {
+    resolve(Math.random() * (max - min) + min)
   })
 }
 
