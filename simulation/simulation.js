@@ -3,8 +3,8 @@ import gaussian from 'gaussian'
 import Orderbook from '../orderbook/index'
 
 let orderbook
-let price
-let price_variance
+let price = 10
+let price_variance = 1
 let volume
 let volume_variance
 let volume_counter
@@ -73,36 +73,43 @@ export function shotgun() {
 
 export function submitOrder() {
   return new Promise(async (resolve, reject) => {
+    let side
+    let trade_price
+    let trade_quantity
+
     try {
-      const side = await chooseSide()
+      side = await chooseSide()
       console.log('side', side)
     } catch (err) {
       reject(err)
     }
 
     try {
-      const trade_price = await bellRandom(price, price_variance)
+      trade_price = await bellRandom(price, price_variance)
+      console.log('trade_price', trade_price)
     } catch (err) {
       reject(err)
     }
 
     try {
-      const trade_quantity = await flatRandom(0, 1000)
-      console.log('quantity', quantity)
+      trade_quantity = await flatRandom(0, 1000)
+      console.log('trade_quantity', trade_quantity)
     } catch (err) {
       reject(err)
     }
-    const order = {
-      price: trade_price
-      quantity: trade_quantity,
-    }
 
-    try {
-      orderbook[`submitSell${side}`](order)
-    } catch (err) {
-      reject(errw)
-    }
-    
+    console.log('trade_price', trade_price)
+    // const order = {
+    //   price: trade_price,
+    //   quantity: trade_quantity,
+    // }
+    //
+    // try {
+    //   orderbook[`submitSell${side}`](order)
+    // } catch (err) {
+    //   reject(errw)
+    // }
+
     resolve(true)
   })
 }
