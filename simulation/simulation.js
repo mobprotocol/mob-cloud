@@ -71,7 +71,7 @@ export function shotgun() {
   })
 }
 
-function submitOrder() {
+export function submitOrder() {
   return new Promise(async (resolve, reject) => {
     try {
       const side = await chooseSide()
@@ -86,13 +86,18 @@ function submitOrder() {
       reject(err)
     }
 
-    console.log('order', side, price)
+    orderbook.submitSell
   })
 }
 
-async function chooseSide() {
+export async function chooseSide() {
   return new Promise((resolve, reject) => {
-    resolve(Math.round(Math.random()))
+    var side = Math.round(Math.random())
+    if (side == 0) {
+      resolve('A')
+    } else {
+      resolve('B')
+    }
   })
 }
 
