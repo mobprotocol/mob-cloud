@@ -1,8 +1,12 @@
+import gaussian from 'gaussian'
+
 import Orderbook from '../orderbook/index'
 
 let orderbook
 let price
+let price_variance
 let volume
+let volume_variance
 let volume_counter
 
 
@@ -59,6 +63,7 @@ export function shotgun() {
       if (volume_counter <= 0) {
         resolve(true)
       }
+      volume_counter = volume_counter - 1
       return shotugun()
     }).catch((err) => {
       reject(err)
@@ -66,4 +71,9 @@ export function shotgun() {
   })
 }
 
-export function bellRandom()
+export function bellRandom() {
+  return new Promise((resolve, reject) => {
+    const distribution = gaussian(mean, variance)
+    resolve(distribution.ppf(Math.random()))
+  })
+}
