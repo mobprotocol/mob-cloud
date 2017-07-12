@@ -12,7 +12,8 @@
     "orderbook-tests": "babel-node ./orderbook/test.js --presets es2015",
     "matching-tests": "babel-node ./match/test.js",
     "settlement-tests": "babel-node ./settlement/test.js --presets es2015",
-    "asset-tests": "babel-node ./asset/test.js --presets es2015"
+    "asset-tests": "babel-node ./asset/test.js --presets es2015",
+    "gauss-simulation": "babel-node ./simulation/simulation.js"
   },
   "repository": {
     "type": "git",
