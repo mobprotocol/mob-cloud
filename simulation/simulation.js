@@ -81,22 +81,29 @@ export function submitOrder() {
     }
 
     try {
-      const price = await bellRandom(price, price_variance)
+      const trade_price = await bellRandom(price, price_variance)
     } catch (err) {
       reject(err)
     }
 
     try {
-      const quantity = await
+      const trade_quantity = await flatRandom(0, 1000)
+      console.log('quantity', quantity)
     } catch (err) {
-      const quantity: await flatRandom(0, 1000)
+      reject(err)
+    }
+    const order = {
+      price: trade_price
+      quantity: trade_quantity,
     }
 
-    const order = {
-      price: price,
-      qua
+    try {
+      orderbook[`submitSell${side}`](order)
+    } catch (err) {
+      reject(errw)
     }
-    orderbook[`submitSell${side}`]()
+    
+    resolve(true)
   })
 }
 
@@ -120,7 +127,7 @@ export async function bellRandom(mean, variance) {
 
 export async function flatRandom(min, max) {
   return new Promise((resolve, reject) => {
-    resolve(Math.random() * (max - min) + min)
+    resolve(Math.round(Math.random() * (max - min) + min))
   })
 }
 
