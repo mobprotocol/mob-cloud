@@ -39,8 +39,8 @@ export function simulationLoop() {
     })
   })
 }
-
-oneSimultation()
+//
+// oneSimultation()
 
 export function calculateMarketPrice() {
   return new Promise((resolve, reject) => {
@@ -71,9 +71,36 @@ export function shotgun() {
   })
 }
 
-export function bellRandom() {
+function submitOrder() {
+  return new Promise(async (resolve, reject) => {
+    try {
+      const side = await chooseSide()
+      console.log('side', side)
+    } catch (err) {
+      reject(err)
+    }
+
+    try {
+      const price = await bellRandom(price, price_variance)
+    } catch (err) {
+      reject(err)
+    }
+
+    console.log('order', side, price)
+  })
+}
+
+async function chooseSide() {
+  return new Promise((resolve, reject) => {
+    resolve(Math.round(Math.random()))
+  })
+}
+
+export async function bellRandom(mean, variance) {
   return new Promise((resolve, reject) => {
     const distribution = gaussian(mean, variance)
     resolve(distribution.ppf(Math.random()))
   })
 }
+
+submitOrder()
