@@ -1,8 +1,14 @@
 import Orderbook from '../orderbook/index'
 
+let orderbook
+let price
+let volume
+let volume_counter
+
+
 export function oneSimultation() {
   return new Promise((resolve, reject) => {
-    const orderbook = new Orderbook({
+    orderbook = new Orderbook({
       tokenA: '0x6846e948d8b1ec25bb99dedf821b0d658e226595',
       tokenB: '0x2da664251cdff1ef96471d5570d6b7d3687b4516'
     })
@@ -17,7 +23,7 @@ export function oneSimultation() {
 
 export function simulationLoop() {
   return new Promise((resolve, reject) => {
-    return Promise.delay(0)
+    return Promise.delay(5000)
     .then(() => {
       return calculateMarketPrice()
     }).then(() => {
@@ -31,3 +37,33 @@ export function simulationLoop() {
 }
 
 oneSimultation()
+
+export function calculateMarketPrice() {
+  return new Promise((resolve, reject) => {
+    resolve(10)
+  })
+}
+
+export function calculateVolume() {
+  return new Promise((resolve, reject) => {
+    resolve(true)
+  })
+}
+
+export function shotgun() {
+  return new Promise((resolve, reject) => {
+    return Promise.delay(0)
+    .then(() => {
+      return submitOrder()
+    }).then(() => {
+      if (volume_counter <= 0) {
+        resolve(true)
+      }
+      return shotugun()
+    }).catch((err) => {
+      reject(err)
+    })
+  })
+}
+
+export function bellRandom()
