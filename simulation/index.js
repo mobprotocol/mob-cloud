@@ -11,13 +11,19 @@ export default class Simulation {
     return new Promise((resolve, reject) => {
       return Promise.delay(3000)
       .then(() => {
-        return this.orderbook.submitSellA({ price: 10, quantity: 10 })
-      }).then((res) => {
-        return this.orderbook.submitSellB({ price: 10, quantity: 10 })
+        return this.tradingBatch()
       }).then((res) => {
         return this.daemon()
       }).catch((err) => {
         reject(err)
+      })
+    })
+  }
+
+  tradingBatch() {
+    return new Promise((resolve, reject) => {
+      return chooseSide().then((side) => {
+        console.log('side', side)
       })
     })
   }
@@ -32,6 +38,8 @@ export default class Simulation {
       }
     })
   }
+
+
 
 
 }
