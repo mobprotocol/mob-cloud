@@ -44,8 +44,8 @@ export function simulationLoop() {
 //
 // oneSimultation()
 
-export function calculateMarketPrice() {
-  return new Promise((resolve, reject) => {
+export async function calculateMarketPrice() {
+  return new Promise(async (resolve, reject) => {
     try {
       price = await bellRandom(price, price_variance)
     } catch (err) {
@@ -55,8 +55,8 @@ export function calculateMarketPrice() {
   })
 }
 
-export function calculateVolume() {
-  return new Promise((resolve, reject) => {
+export async  function calculateVolume() {
+  return new Promise(async (resolve, reject) => {
     try {
       volume = await bellRandom(volume, volume_variance)
     } catch (err) {
@@ -84,7 +84,7 @@ export function shotgun() {
   })
 }
 
-export function submitOrder() {
+export async function submitOrder() {
   return new Promise(async (resolve, reject) => {
     let side
     let trade_price
