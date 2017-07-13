@@ -1,3 +1,4 @@
+import Promise from 'bluebird'
 import gaussian from 'gaussian'
 
 import Orderbook from '../orderbook/index'
@@ -16,6 +17,7 @@ export function oneSimultation() {
       tokenA: '0x6846e948d8b1ec25bb99dedf821b0d658e226595',
       tokenB: '0x2da664251cdff1ef96471d5570d6b7d3687b4516'
     })
+    console.log('orderbook', orderbook, Orderbook)
     return simulationLoop().then((res) => {
       if(res) {
         resolve(res)
@@ -31,7 +33,7 @@ export function simulationLoop() {
     .then(() => {
       return calculateMarketPrice()
     }).then(() => {
-      return calculateVoluem()
+      return calculateVolume()
     }).then(() => {
       return shotgun()
     }).then(() => {
@@ -64,7 +66,7 @@ export function shotgun() {
         resolve(true)
       }
       volume_counter = volume_counter - 1
-      return shotugun()
+      return shotgun()
     }).catch((err) => {
       reject(err)
     })
@@ -98,17 +100,16 @@ export function submitOrder() {
       reject(err)
     }
 
-    console.log('trade_price', trade_price)
-    // const order = {
-    //   price: trade_price,
-    //   quantity: trade_quantity,
-    // }
-    //
-    // try {
-    //   orderbook[`submitSell${side}`](order)
-    // } catch (err) {
-    //   reject(errw)
-    // }
+    const order = {
+      price: trade_price,
+      quantity: trade_quantity,
+    }
+
+    try {
+      orderbook[`submitSell${side}`](order)
+    } catch (err) {
+      reject(err)
+    }
 
     resolve(true)
   })
@@ -138,4 +139,4 @@ export async function flatRandom(min, max) {
   })
 }
 
-submitOrder()
+oneSimultation()
