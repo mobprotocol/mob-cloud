@@ -71,7 +71,7 @@ export default class Simulation {
     return new Promise((resolve, reject) => {
       this.bellRandom(this.volume, this.volumeVariance)
       .then((volume) => {
-        resolve(volume)
+        resolve(Math.round(volume))
       }).catch((err) => {
         reject(err)
       })
@@ -99,12 +99,12 @@ export default class Simulation {
   submitTrade() {
     return new Promise((resolve, reject) => {
       const order = {}
-      chooseSide().then((side) => {
+      this.chooseSide().then((side) => {
         order.side = side
-        return bellRandom(this.marketPrice, this.marketVariance)
+        return this.bellRandom(this.marketPrice, this.marketVariance)
       }).then((price) => {
         order.price = price
-        return flatRandom(this.quantityMin, this.quantityMax)
+        return this.flatRandom(this.quantityMin, this.quantityMax)
       }).then((quantity) => {
         order.quantity = quantity
         resolve(true)
