@@ -24,9 +24,18 @@ export default class Simulation {
 
   tradingBatch() {
     return new Promise((resolve, reject) => {
-      return this.calculateMarketPrice().then((price) => {
-        console.log('price', price)
-        resolve(true )
+      return this.calculateMarketPrice()
+      .then((price) => {
+        this.marketPrice = price
+        return this.calculateVolume()
+      }).then((volume) => {
+        this.volume = volume
+        this.volumeCounter = volume
+        return shotgun()
+      }).then(() => {
+        resolve(true)
+      }).catch((err) => {
+        rejct(err)
       })
     })
   }
@@ -54,10 +63,23 @@ export default class Simulation {
     })
   }
 
+  calculateVolume() {
+    return new Promise((resolve, reject) => {
+      bellRandom(this.volume, this.volumeVariance)
+      .then((volume) => {
+        this.volume = volume
+      }).catch((err) => {
+        reject(err)
+      })
+    })
+  }
+
   bellRandom() {
     return new Promise((resolve, reject) => {
       const distribution = gaussian(mean, variance)
       resolve(distribution.ppf(Math.random()))
     })
   }
+
+
 }
