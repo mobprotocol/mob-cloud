@@ -45,4 +45,11 @@ export default class Simulation {
       resolve(10)
     })
   }
+
+  bellRandom() {
+    return new Promise((resolve, reject) => {
+      const distribution = gaussian(mean, variance)
+      resolve(distribution.ppf(Math.random()))
+    })
+  }
 }
