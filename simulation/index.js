@@ -22,11 +22,16 @@ export default class Simulation {
     })
   }
 
-  price() {
-
+  chooseSide() {
+    return new Promise((resolve, reject) => {
+      const binary = Math.round(Math.random())
+      if (binary == 0) {
+        resolve('A')
+      } else {
+        resolve('B')
+      }
+    })
   }
 
-  volume() {
 
-  }
 }
