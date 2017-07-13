@@ -22,7 +22,7 @@ export default class Simulation {
 
   tradingBatch() {
     return new Promise((resolve, reject) => {
-      return chooseSide().then((side) => {
+      return this.chooseSide().then((side) => {
         console.log('side', side)
       })
     })
