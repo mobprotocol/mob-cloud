@@ -22,8 +22,9 @@ export default class Simulation {
 
   tradingBatch() {
     return new Promise((resolve, reject) => {
-      return this.chooseSide().then((side) => {
-        console.log('side', side)
+      return this.calculateMarketPrice().then((price) => {
+        console.log('price', price)
+        resolve(true )
       })
     })
   }
@@ -39,7 +40,9 @@ export default class Simulation {
     })
   }
 
-
-
-
+  calculateMarketPrice() {
+    return new Promise((resolve, reject) => {
+      resolve(10)
+    })
+  }
 }
