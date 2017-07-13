@@ -120,4 +120,10 @@ export default class Simulation {
       resolve(distribution.ppf(Math.random()))
     })
   }
+
+  flatRandom(min, max) {
+    return new Promise((resolve, reject) => {
+      resolve(Math.round(Math.random() * (max - min) + min))
+    })
+  }
 }
