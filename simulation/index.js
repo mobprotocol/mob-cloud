@@ -9,6 +9,8 @@ export default class Simulation {
     this.volume = 100
     this.volumeVariance = 10
     this.volumeCounter
+    this.quantityMin = 0
+    this.quantityMax = 1000
     this.daemon()
   }
 
@@ -99,14 +101,17 @@ export default class Simulation {
   submitTrade() {
     return new Promise((resolve, reject) => {
       const order = {}
-      this.chooseSide().then((side) => {
-        order.side = side
+      let side
+      this.chooseSide().then((binary) => {
+        side = binary
         return this.bellRandom(this.marketPrice, this.marketVariance)
       }).then((price) => {
         order.price = price
         return this.flatRandom(this.quantityMin, this.quantityMax)
       }).then((quantity) => {
         order.quantity = quantity
+        return this.orderbook[`submitSell${side}`](order)
+      }).then(() => {
         resolve(true)
       }).catch((err) => {
         reject(err)
