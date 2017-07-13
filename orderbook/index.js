@@ -6,7 +6,6 @@ import { List } from 'immutable'
 export default class Orderbook {
   constructor(params) {
     console.log('### made it to Orderbook constructor')
-    this.hello = 'world'
     this.tokenA = params.tokenA
     this.tokenB = params.tokenB
     this.sellA =  new List()
@@ -33,25 +32,50 @@ export default class Orderbook {
     }
   }
 
-  submitSellB(order) {
-    console.log('### submitting sellB order', order)
-    let index
-    let found = false
-    this.sellB.forEach((entry, i) => {
-      if (entry.price < order.price && found == false) {
-        index = i
-        found = true
+  submitSellA(order) {
+    return new Promise((resolve, reject) => {
+      console.log('### submitting sellA order', order)
+      let index
+      let found = false
+      this.sellB.forEach((entry, i) => {
+        if (entry.price < order.price && found == false) {
+          index = i
+          found = true
+        }
+      })
+      if(index == 0) {
+        this.sellA = this.sellA.unshift(order)
+      } else if (index) {
+        this.sellA = this.sellA.splice(index, 0, order)
+      } else {
+        this.sellA = this.sellA.push(order)
       }
+      resolve(true)
     })
-    if (index == 0) {
-      console.log('unshifting')
-      this.sellB = this.sellB.unshift(order)
-    } else if (index) {
-      console.log('splicing', index)
-      this.sellB = this.sellB.splice(index, 0, order)
-    } else {
-      console.log('pushing')
-      this.sellB = this.sellB.push(order)
-    }
+  }
+
+  submitSellB(order) {
+    return new Promise((resolve, reject) => {
+      console.log('### submitting sellB order', order)
+      let index
+      let found = false
+      this.sellB.forEach((entry, i) => {
+        if (entry.price < order.price && found == false) {
+          index = i
+          found = true
+        }
+      })
+      if (index == 0) {
+        console.log('unshifting')
+        this.sellB = this.sellB.unshift(order)
+      } else if (index) {
+        console.log('splicing', index)
+        this.sellB = this.sellB.splice(index, 0, order)
+      } else {
+        console.log('pushing')
+        this.sellB = this.sellB.push(order)
+      }
+      resolve(true)
+    })
   }
 }
