@@ -46,13 +46,24 @@ export function simulationLoop() {
 
 export function calculateMarketPrice() {
   return new Promise((resolve, reject) => {
-    resolve(10)
+    try {
+      price = await bellRandom(price, price_variance)
+    } catch (err) {
+      reject(err)
+    }
+    resolve(price)
   })
 }
 
 export function calculateVolume() {
   return new Promise((resolve, reject) => {
-    resolve(true)
+    try {
+      volume = await bellRandom(volume, volume_variance)
+    } catch (err) {
+      rejct(err)
+    }
+    volume_counter = volume
+    resolve(volume)
   })
 }
 
@@ -65,7 +76,7 @@ export function shotgun() {
       if (volume_counter <= 0) {
         resolve(true)
       }
-      volume_counter = volume_counter - 1
+      volume_counter--
       return shotgun()
     }).catch((err) => {
       reject(err)
