@@ -3,6 +3,8 @@ import Promise from 'bluebird'
 export default class Simulation {
   constructor(params) {
     this.orderbook = params.orderbook
+    this.marketPrice = 10
+    this.marketVariance = .5
     this.daemon()
   }
 
@@ -42,7 +44,13 @@ export default class Simulation {
 
   calculateMarketPrice() {
     return new Promise((resolve, reject) => {
-      resolve(10)
+      bellRandom(this.marketPrice, this.marketVariance)
+      .then((price) => {
+        this.marketPrice = price
+        resolve(true)
+      }).catch((err) => {
+        reject(err)
+      })
     })
   }
 
