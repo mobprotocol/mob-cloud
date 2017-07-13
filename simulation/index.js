@@ -5,11 +5,13 @@ export default class Simulation {
     this.orderbook = params.orderbook
     this.marketPrice = 10
     this.marketVariance = .5
+    this.volume = 100
+    this.volumeVariance = 10
+    this.volumeCounter
     this.daemon()
   }
 
   daemon() {
-    console.log('this.orderbok', this.orderbook)
     return new Promise((resolve, reject) => {
       return Promise.delay(3000)
       .then(() => {
@@ -35,7 +37,7 @@ export default class Simulation {
       }).then(() => {
         resolve(true)
       }).catch((err) => {
-        rejct(err)
+        reject(err)
       })
     })
   }
@@ -55,8 +57,7 @@ export default class Simulation {
     return new Promise((resolve, reject) => {
       bellRandom(this.marketPrice, this.marketVariance)
       .then((price) => {
-        this.marketPrice = price
-        resolve(true)
+        resolve(price)
       }).catch((err) => {
         reject(err)
       })
@@ -67,7 +68,7 @@ export default class Simulation {
     return new Promise((resolve, reject) => {
       bellRandom(this.volume, this.volumeVariance)
       .then((volume) => {
-        this.volume = volume
+        resolve(volume)
       }).catch((err) => {
         reject(err)
       })
