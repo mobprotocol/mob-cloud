@@ -13,7 +13,8 @@
     "matching-tests": "babel-node ./match/test.js",
     "settlement-tests": "babel-node ./settlement/test.js --presets es2015",
     "asset-tests": "babel-node ./asset/test.js --presets es2015",
-    "gauss-simulation": "babel-node ./simulation/simulation.js"
+    "gauss-simulation": "babel-node ./simulation/simulation.js",
+    "simulation-tests": "babel-node ./simulation/test.js"
   },
   "repository": {
     "type": "git",
@@ -44,6 +45,7 @@
     "ethereumjs-testrpc": "^4.0.1",
     "ethereumjs-util": "^5.1.2",
     "express": "^4.15.3",
+    "gaussian": "^1.1.0",
     "immutable": "^3.8.1",
     "install": "^0.10.1",
     "jsonfile": "^3.0.0",
