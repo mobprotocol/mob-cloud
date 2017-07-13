@@ -17,7 +17,7 @@ export function oneSimultation() {
       tokenA: '0x6846e948d8b1ec25bb99dedf821b0d658e226595',
       tokenB: '0x2da664251cdff1ef96471d5570d6b7d3687b4516'
     })
-    console.log('orderbook', orderbook, Orderbook)
+
     return simulationLoop().then((res) => {
       if(res) {
         resolve(res)
@@ -31,12 +31,16 @@ export function simulationLoop() {
   return new Promise((resolve, reject) => {
     return Promise.delay(5000)
     .then(() => {
+      console.log(1)
       return calculateMarketPrice()
     }).then(() => {
+      console.log(2)
       return calculateVolume()
     }).then(() => {
+      console.log(3)
       return shotgun()
     }).then(() => {
+      console.log(4)
       resolve(true)
     })
   })
@@ -69,18 +73,19 @@ export async  function calculateVolume() {
 
 export function shotgun() {
   return new Promise((resolve, reject) => {
-    return Promise.delay(0)
-    .then(() => {
-      return submitOrder()
-    }).then(() => {
-      if (volume_counter <= 0) {
-        resolve(true)
-      }
-      volume_counter--
-      return shotgun()
-    }).catch((err) => {
-      reject(err)
-    })
+    // return Promise.delay(0)
+    // .then(() => {
+    //   return submitOrder()
+    // }).then(() => {
+    //   if (volume_counter <= 0) {
+    //     resolve(true)
+    //   }
+    //   volume_counter--
+    //   return shotgun()
+    // }).catch((err) => {
+    //   reject(err)
+    // })
+    resolve(true)
   })
 }
 
