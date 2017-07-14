@@ -5,7 +5,7 @@
 
 # Summary
 
-This is a cloud based exchange network for erc20 smart contracts. Given a set of n tokens the program creates a `n!/((n-2!)2!)` `permutations`, or a fully connected topology between the token set.
+This is a cloud based exchange network for erc20 smart contracts. Given a set of n tokens the program creates `n!/((n-2!)2!)` `permutations`, or a fully connected topology between the token set.
 
 Each permutation is composed of 4 basic elements that create a self maintaining order-book, matching, and settlement engine. The result is a parallelizable double-action network for the Ethereum ecosystem.
 
