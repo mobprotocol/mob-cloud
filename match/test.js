@@ -58,7 +58,9 @@ Promise.delay(0)
 }).then(() => {
   return matchAgent = new Match({ settlement: settlement, orderbook: orderbook })
 }).then(() => {
-
+  resolve(true)
+}).catch((err) => {
+  reject(err)
 })
 
 export function fillOrderbook() {
