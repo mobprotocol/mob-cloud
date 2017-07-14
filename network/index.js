@@ -1,4 +1,5 @@
 import Promise from 'bluebird'
+import { sha256 } from 'ethereumjs-util'
 
 import Permutation from '../permutation/index'
 import { contracts} from '../factory/contracts'
@@ -20,9 +21,12 @@ class Network {
         const baseContract = contract
         return Object.keys(contracts).map((contract) => {
           if (contract > baseContract) {
-            permutations.push({
-              tokenA: baseContract,
-              tokenB: contract
+            permutationHash(baseContract, contract)
+            .then(() => {
+              permutations.push({
+                tokenA: baseContract,
+                tokenB: contract
+              })
             })
           }
         })
@@ -42,6 +46,7 @@ class Network {
         return this.getConnectedTopology()
       }).map((permutation) => {
         console.log('### CREATING PERMUTATION FOR TOKEN PAIR', contracts[permutation.tokenA].name, contracts[permutation.tokenB].name)
+
         this.permutations[`${contracts[permutation.tokenA].name}_${contracts[permutation.tokenB]}`] = new Permutation({
           tokenA: permutation.tokenA,
           tokenB: permutation.tokenB,
@@ -54,27 +59,35 @@ class Network {
       })
     })
   }
-}
 
-permutationHash(tokenA, tokenB) {
-  return new Promise((resolve, reject) => {
-    return alphaNumericSort(tokenA, tokenB)
-    .then((res) => {
-      if(res == 1) {
 
-      } else {
-
-      }
-    }).then(() => {
-      resolve(true)
+  permutationHash(tokenA, tokenB) {
+    return new Promise((resolve, reject) => {
+      return alphaNumericSort(tokenA, tokenB)
+      .then((res) => {
+        if(res == 1) {
+          return hashSortedPair(`${tokenB}_${tokenA}`)
+        } else {
+          return hashSortedPair(`${tokenA}_${tokenB}`)
+        }
+      }).then((key) => {
+        resolve(key)
+      })
     })
-  })
+  }
+
+  alphaNumericSort() {
+    return new Promise((resolve, reject) => {
+      resolve(1)
+    })
+  }
+
+  hashSortedPair(pair) {
+    return new Promise((resolve, reject) => {
+      resolve(sha256(pair))
+    })
+  }
 }
 
-alphaNumericSort() {
-
-}
-
-hash
 
 const network = new Network()
