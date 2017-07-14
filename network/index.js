@@ -85,7 +85,7 @@ class Network {
 
   hashSortedPair(pair) {
     return new Promise((resolve, reject) => {
-      resolve(sha256(pair))
+      resolve(sha256(pair).toString('hex'))
     })
   }
 }
