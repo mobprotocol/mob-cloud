@@ -1,5 +1,5 @@
 import Promise from 'bluebird'
-import { sha256 } from 'ethereumjs-util'
+import { sha256, sha3 } from 'ethereumjs-util'
 
 import Permutation from '../permutation/index'
 import { contracts} from '../factory/contracts'
@@ -65,10 +65,13 @@ class Network {
     return new Promise((resolve, reject) => {
       return this.alphaNumericSort(tokenA, tokenB)
       .then((res) => {
+        console.log('res', res)
         if(res == 1) {
-          return this.hashSortedPair(`${tokenB}_${tokenA}`)
+          // return this.hashSortedPair(`${tokenB}_${tokenA}`)
+          return [tokenB, tokenA]
         } else {
-          return this.hashSortedPair(`${tokenA}_${tokenB}`)
+          // return this.hashSortedPair(`${tokenA}_${tokenB}`)
+          return [tokenA, tokenB]
         }
       }).then((key) => {
         console.log('key', key)
@@ -77,15 +80,15 @@ class Network {
     })
   }
 
-  alphaNumericSort() {
+  alphaNumericSort(tokenA, tokenB) {
     return new Promise((resolve, reject) => {
-      resolve(1)
+      resolve(tokenA.localeCompare(tokenB))
     })
   }
 
   hashSortedPair(pair) {
     return new Promise((resolve, reject) => {
-      resolve(sha256(pair).toString('hex'))
+      resolve(hashPersonalMessage(pair).toString('hex'))
     })
   }
 }
