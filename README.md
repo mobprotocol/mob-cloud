@@ -17,7 +17,7 @@ Each permutation is composed of 4 basic elements that create a self maintaining 
 
 ## Orderbook
 
-SellA and SellB ledger maintain a sorted set of orders. Two `double-ended-queue`s are instantiated for a two sided market place.
+SellA and SellB ledger maintain a sorted set of orders. Two `double-ended-queue`s are instantiated for a two sided market place, Sell Ledger A and Sell Ledger B.
 
 The protocol uses a price-priority queueing system, meaning the best price (least asks) are matched first. The orderbook ledgers are always perfectly sorted at any given point in time.
 
@@ -26,9 +26,9 @@ The protocol uses a price-priority queueing system, meaning the best price (leas
 
 The algorithm or `Agent` matches in continuous time with fast memory operations and async disk writes.
 
-A daemon watches the top of the `Orderbook` and matches the best order in the Sell Ledger. The matching agent will choose with 50% probability `SellA or SellB` ledger. It takes the best order in the market and iterates through the opposite ledger until the order is exhausted, the order moves out of the market, or the ledger is emptied.
+A daemon watches the top of the `Orderbook` and matches the best orders in the Sell Ledgers. The matching agent will choose with 50% probability `SellA or SellB` ledger. It takes the best order in the market and iterates through the opposite ledger until the order is exhausted, the order moves out of the market, or the ledger is emptied.
 
-The matching Agent can only match orders `in the market`, meaning both parties are guaranteed at least as good of a deal as the ordered. Send amounts are calculated for the atomic swap between the two participants based on their price preference and the resulting spread left in the liquidity pool is sent to the Matching Agent. This means matching Agents are economically incentivized to maintain the price priority.
+The matching Agent can only match orders `in the market`, meaning both parties are guaranteed at least as good of a deal as they ordered. Send amounts are calculated for the atomic swap between the two participants based on their price preference and the resulting spread left in the liquidity pool is sent to the Matching Agent. This means matching Agents are economically incentivized to maintain the price priority.
 
 
 ## Cleaning
@@ -58,20 +58,20 @@ npm i ethereumjs-testrpc -g
 
 `npm run user-swarm`
 
-This script creates 100 key pair identities that can sign and create transactions on our exchange network.
+This script creates 100 key pair identities that can sign and create transactions the Mob exchange network.
 
 
 ## EVM
 
 `npm run evm`
 
-This starts a `TESTRPC` process and unlocks the accounts of the user-swarm
+This starts a `TESTRPC` process and unlocks the accounts of the user-swarm.
 
 
 ## Assets
 `npm run create-tokens`
 
-Deploys 10 ERC20 token contracts. It magically creates a compiled json file and deploys the contracts to the EVM. Checkout out `/eths6` for the functional, promisified web3 library.
+Deploys 10 ERC20 token contracts. It creates a compiled json file and deploys the contracts to the EVM. Checkout out `/eths6` for the functional, promisified web3 library.
 
 
 ## Exchange Network
