@@ -98,35 +98,18 @@ export async function submitOrder() {
     try {
       side = await chooseSide()
       console.log('side', side)
-    } catch (err) {
-      reject(err)
-    }
-
-    try {
       trade_price = await bellRandom(price, price_variance)
       console.log('trade_price', trade_price)
-    } catch (err) {
-      reject(err)
-    }
-
-    try {
       trade_quantity = await flatRandom(0, 1000)
       console.log('trade_quantity', trade_quantity)
-    } catch (err) {
-      reject(err)
-    }
-
-    const order = {
-      price: trade_price,
-      quantity: trade_quantity,
-    }
-
-    try {
+      const order = {
+        price: trade_price,
+        quantity: trade_quantity,
+      }
       orderbook[`submitSell${side}`](order)
     } catch (err) {
       reject(err)
     }
-
     resolve(true)
   })
 }
