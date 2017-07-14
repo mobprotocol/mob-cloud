@@ -21,7 +21,7 @@ class Network {
         const baseContract = contract
         return Object.keys(contracts).map((contract) => {
           if (contract > baseContract) {
-            permutationHash(baseContract, contract)
+            this.permutationHash(baseContract, contract)
             .then(() => {
               permutations.push({
                 tokenA: baseContract,
@@ -63,14 +63,15 @@ class Network {
 
   permutationHash(tokenA, tokenB) {
     return new Promise((resolve, reject) => {
-      return alphaNumericSort(tokenA, tokenB)
+      return this.alphaNumericSort(tokenA, tokenB)
       .then((res) => {
         if(res == 1) {
-          return hashSortedPair(`${tokenB}_${tokenA}`)
+          return this.hashSortedPair(`${tokenB}_${tokenA}`)
         } else {
-          return hashSortedPair(`${tokenA}_${tokenB}`)
+          return this.hashSortedPair(`${tokenA}_${tokenB}`)
         }
       }).then((key) => {
+        console.log('key', key)
         resolve(key)
       })
     })
