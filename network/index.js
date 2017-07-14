@@ -25,7 +25,8 @@ class Network {
             .then((key) => {
               permutations[key] = {
                 tokenA: baseContract,
-                tokenB: contract
+                tokenB: contract,
+                balances: {}
               }
             })
           }
