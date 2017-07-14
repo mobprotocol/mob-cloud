@@ -56,4 +56,25 @@ class Network {
   }
 }
 
+permutationHash(tokenA, tokenB) {
+  return new Promise((resolve, reject) => {
+    return alphaNumericSort(tokenA, tokenB)
+    .then((res) => {
+      if(res == 1) {
+
+      } else {
+
+      }
+    }).then(() => {
+      resolve(true)
+    })
+  })
+}
+
+alphaNumericSort() {
+
+}
+
+hash
+
 const network = new Network()
