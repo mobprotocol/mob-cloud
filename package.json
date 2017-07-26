@@ -60,6 +60,7 @@
     "request-promise": "^4.2.1",
     "simple-websocket": "^5.0.2",
     "solc": "^0.4.11",
-    "sublevel": "^2.4.0"
+    "sublevel": "^2.4.0",
+    "web3": "^1.0.0-beta.11"
   }
 }
