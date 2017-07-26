@@ -7,20 +7,21 @@ import Web3 from 'web3'
 const web3 = new Web3()
 web3.setProvider(new web3.providers.HttpProvider('http://localhost:8545'));
 
-let account
+let owner
 export function tokenPair() {
   return new Promise((resolve, reject) => {
     return getAccount()
-    .then(() => {
-      console.log('pair', pair)
+    .then((account) => {
+      owner = account
       return pair
     }).map((asset) => {
       console.log('asset', asset)
       return new Asset({
-        name: asset.name,
+        file: asset.name,
         ticker: asset.ticker,
         supply: asset.supply,
-        file: 'Asset'
+        deploy: true,
+        owner: owner
       })
     }).then(() => {
       resolve(true)
