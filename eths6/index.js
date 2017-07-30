@@ -170,10 +170,10 @@ export default class Eths6 {
       .then(() => {
         this.bytecode = compiled.contracts[':' + this.file].bytecode
         this.abi = compiled.contracts[':' + this.file].interface
-        return this.eth.estimateGasAsync({ data: this.bytecode })
+        return this.web3.eth.estimateGasAsync({ data: this.bytecode })
       }).then((estimate) => {
-        this.gasEstimate = estimate
         console.log('estimate', estimate)
+        this.gasEstimate = estimate
         return this.contract = this.web3.eth.contract(JSON.parse(this.abi))
       }).then(() => {
         // console.log('this.contract', this.contract)
