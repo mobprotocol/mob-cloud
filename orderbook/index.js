@@ -10,7 +10,8 @@ export default class Orderbook {
     this.tokenB = params.tokenB
     this.sellA =  new List()
     this.sellB = new List()
-    // this.db = params.db.sublevel(`orderbook_${params.tokenA}_params${params.tokenB}`)
+    this.db = params.db.sublevel(`orderbookA_${params.tokenA}_params${params.tokenB}`)
+    this.db = params.db.sublevel(`orderbookB_${params.tokenA}_params${params.tokenB}`)
   }
 
   submitSellA(order) {
@@ -31,6 +32,7 @@ export default class Orderbook {
       } else {
         this.sellA = this.sellA.push(order)
       }
+      this.saveState('A')
       resolve(true)
     })
   }
