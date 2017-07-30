@@ -1,4 +1,5 @@
 import Promise from 'bluebird'
+import { db } from '../leveldb/index'
 
 import Orderbook from './index'
 
@@ -58,7 +59,8 @@ export function tests() {
     .then(() => {
       return orderbook = new Orderbook({
         tokenA: '0x2da664251cdff1ef96471d5570d6b7d3687b4516',
-        tokenB: '0x6846e948d8b1ec25bb99dedf821b0d658e226595'
+        tokenB: '0x6846e948d8b1ec25bb99dedf821b0d658e226595',
+        db
       })
     }).then(() => {
     //   return orderbook.submitSellA(generateOrder())
