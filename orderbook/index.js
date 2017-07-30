@@ -17,6 +17,7 @@ export default class Orderbook {
   submitSellA(order) {
     return new Promise((resolve, reject) => {
       console.log('### submitting sellA order', order)
+
       let index
       let found = false
       this.sellB.forEach((entry, i) => {
@@ -32,9 +33,11 @@ export default class Orderbook {
       } else {
         this.sellA = this.sellA.push(order)
       }
+
       this.diskA.put(new Date(), this.sellA, () => {
         console.log('wrote orderbookA to disk')
       })
+
       resolve(true)
     })
   }
@@ -42,6 +45,7 @@ export default class Orderbook {
   submitSellB(order) {
     return new Promise((resolve, reject) => {
       console.log('### submitting sellB order', order)
+
       let index
       let found = false
       this.sellB.forEach((entry, i) => {
@@ -60,7 +64,11 @@ export default class Orderbook {
         console.log('pushing')
         this.sellB = this.sellB.push(order)
       }
-      
+
+      this.diskB.put(new Date(), this.sellB, () => {
+        console.log('wrote orderbookB to disk')
+      })
+
       resolve(true)
     })
   }
