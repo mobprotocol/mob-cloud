@@ -14,25 +14,6 @@ export default class Orderbook {
   }
 
   submitSellA(order) {
-    console.log('### submitting sellA order', order)
-    let index
-    let found = false
-    this.sellB.forEach((entry, i) => {
-      if (entry.price < order.price && found == false) {
-        index = i
-        found = true
-      }
-    })
-    if(index == 0) {
-      this.sellA = this.sellA.unshift(order)
-    } else if (index) {
-      this.sellA = this.sellA.splice(index, 0, order)
-    } else {
-      this.sellA = this.sellA.push(order)
-    }
-  }
-
-  submitSellA(order) {
     return new Promise((resolve, reject) => {
       console.log('### submitting sellA order', order)
       let index
