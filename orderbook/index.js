@@ -36,6 +36,10 @@ export default class Orderbook {
         this.sellA = this.sellA.push(order)
       }
 
+      this.diskActionsA(new Date(), JSON.stringify(order), () => {
+        console.log('wrote order to disk', order)
+      })
+
       this.diskSellA.put(new Date(), this.sellA, () => {
         console.log('wrote orderbookA to disk')
       })
@@ -66,6 +70,10 @@ export default class Orderbook {
         console.log('pushing')
         this.sellB = this.sellB.push(order)
       }
+
+      this.diskActionsB(new Date(), JSON.stringify(order), () => {
+        console.log('wrote order to disk', order)
+      })
 
       this.diskSellB.put(new Date(), this.sellB, () => {
         console.log('wrote orderbookB to disk')
