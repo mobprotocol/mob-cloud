@@ -10,8 +10,8 @@ export default class Orderbook {
     this.tokenB = params.tokenB
     this.sellA =  new List()
     this.sellB = new List()
-    this.db = params.db.sublevel(`orderbookA_${params.tokenA}_params${params.tokenB}`)
-    this.db = params.db.sublevel(`orderbookB_${params.tokenA}_params${params.tokenB}`)
+    this.diskA = params.db.sublevel(`orderbookA_${params.tokenA}_params${params.tokenB}`)
+    this.diskB = params.db.sublevel(`orderbookB_${params.tokenA}_params${params.tokenB}`)
   }
 
   submitSellA(order) {
@@ -32,7 +32,9 @@ export default class Orderbook {
       } else {
         this.sellA = this.sellA.push(order)
       }
-      this.saveState('A')
+      this.diskA.put(new Date(), this.sellA, () => {
+        console.log('wrote orderbookA to disk')
+      })
       resolve(true)
     })
   }
@@ -58,6 +60,7 @@ export default class Orderbook {
         console.log('pushing')
         this.sellB = this.sellB.push(order)
       }
+      
       resolve(true)
     })
   }
