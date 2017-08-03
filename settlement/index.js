@@ -10,7 +10,6 @@ export default class Settlement {
     this.actions_db = params.db.sublevel(`settlement_actions_${params.tokenA}_${params.tokenB}`)
     // this.trie = new Trie(this.db)
     this.queue = new List()
-    this.daemon()
   }
 
   daemon() {
