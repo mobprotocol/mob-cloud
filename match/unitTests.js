@@ -24,9 +24,18 @@ const matchingAgent = new Match({
   orderbook,
 })
 
-// test('should not match given orders out of the market', (t) => {
-//   cons
-// })
+function setup() {
+  // need to start matching daemon
+  settlement.daemon()
+  console.log('did we make it')
+}
+
+
+setup()
+
+test('should not match given orders out of the market', (t) => {
+
+})
 
 console.log('made it here')
 console.log('matchingAgent', matchingAgent)
