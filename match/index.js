@@ -4,7 +4,6 @@ export default class Match {
   constructor(params) {
     this.orderbook = params.orderbook
     this.settlement = params.settlement
-    this.daemon()
   }
 
   daemon() {
