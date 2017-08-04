@@ -11,7 +11,6 @@ export function createAsset() {
   return new Promise((resolve, reject) => {
     return Promise.delay(0)
     .then(() => {
-      console.log(1)
       return operator = new User('operator')
     }).then(() => {
       return operator.setupAccount()
