@@ -17,7 +17,8 @@ export function tokenPair() {
     }).map((asset) => {
       console.log('asset', asset)
       return new Asset({
-        file: asset.name,
+        file: 'Asset',
+        name: asset.name,
         ticker: asset.ticker,
         supply: asset.supply,
         deploy: true,
